@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.Server;
 import model.Table;
 
-public interface DatabaseSupportInterface {
+public interface StorageSupportInterface {
 	boolean authenticatePasscode(String passcode);
 	boolean updateTableCount(int newTableCount);
 	boolean addServer(String serverID);
