@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import interfaces.RestaurantInterface;
 
 public class Restaurant implements RestaurantInterface {
@@ -21,20 +22,18 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean addServer(String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+		return storageSupport.addServer(serverID);
 	}
 
 	@Override
 	public boolean deleteServer(String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+		return storageSupport.deleteServer(serverID);
 	}
 
 	@Override
 	public String getTableInfo(int tableNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		Table t = storageSupport.getTable(tableNumber);
+		return t.getTableInfo();
 	}
 
 	@Override
@@ -76,8 +75,17 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public String getServerTables(String serverID) {
-		// TODO Auto-generated method stub
-		return null;
+		String ret = "";
+		ArrayList<Table> allTables = storageSupport.getAllTables();
+		for(Table t : allTables)
+		{
+			Server s = t.getServer();
+			if(s.getServerID().equals(serverID))
+			{
+				ret.concat(t.getTableInfo() + " ");
+			}
+		}
+		return ret;
 	}
 
 	@Override

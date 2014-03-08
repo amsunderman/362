@@ -18,20 +18,17 @@ public class RestaurantController implements RestaurantControllerInterface{
 
 	@Override
 	public boolean addServer(String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+		return restaurant.addServer(serverID);
 	}
 
 	@Override
 	public boolean deleteServer(String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+		return restaurant.deleteServer(serverID);
 	}
 
 	@Override
 	public String getTableInfo(int tableNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getTableInfo(tableNumber);
 	}
 
 	@Override
@@ -51,8 +48,7 @@ public class RestaurantController implements RestaurantControllerInterface{
 
 	@Override
 	public String getServerTables(String serverID) {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getServerTables(serverID);
 	}
 
 	@Override
