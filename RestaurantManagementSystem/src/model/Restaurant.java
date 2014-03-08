@@ -3,21 +3,29 @@ package model;
 import interfaces.RestaurantInterface;
 
 public class Restaurant implements RestaurantInterface {
+	
+	private StorageSupport storageSupport = null;
+	private RestaurantStatistics restaurantStatistics = null;
+	
+	public Restaurant() {
+		restaurantStatistics = new RestaurantStatistics();
+		storageSupport = new StorageSupport(restaurantStatistics);
+	}
+	
+	
+	@Override
+	public boolean editTableCount(int newTableCount) {
+		return restaurantStatistics.updateTableCount(newTableCount);
+	}
 
 	@Override
-	public boolean editTableCount(String passcode, int newTableCount) {
+	public boolean addServer(String serverID) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean addServer(String passcode, String serverID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteServer(String passcode, String serverID) {
+	public boolean deleteServer(String serverID) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -30,20 +38,39 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean changeTableServer(int tableNumber, String newServerID) {
-		// TODO Auto-generated method stub
-		return false;
+		Table table = storageSupport.getTable(tableNumber);
+		if (table == null) {
+			return false;
+		}
+		Server newServer = storageSupport.getServer(newServerID);
+		if (newServer == null) {
+			return false;
+		}
+		Server server = table.getServer();
+		server.decrementServerTableCount();
+		table.setServer(newServer);
+		newServer.incrementTableCount();
+		return true;
 	}
 
 	@Override
 	public boolean setTableToInUse(int tableNumber, String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+		Table table = storageSupport.getTable(tableNumber);
+		if (table == null) {
+			return false;
+		}
+		Server server = storageSupport.getServer(serverID);
+		return table.setToInUse(server);
 	}
 
 	@Override
 	public boolean setTableToReady(int tableNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		Table table = storageSupport.getTable(tableNumber);
+		if (table == null) {
+			return false;
+		}
+		table.setToReady();
+		return true;
 	}
 
 	@Override
@@ -62,6 +89,16 @@ public class Restaurant implements RestaurantInterface {
 	public String getServerFeedback(String serverID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean authenticate(String passcode) {
+		return storageSupport.authenticatePasscode(passcode);
+	}
+
+
+	public void dumpToFile() {
+		storageSupport.dumpToFile(restaurantStatistics);
 	}
 
 }

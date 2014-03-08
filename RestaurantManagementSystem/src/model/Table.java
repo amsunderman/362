@@ -4,6 +4,14 @@ import interfaces.TableInterface;
 
 public class Table implements TableInterface {
 
+	private Server server = null;
+	private boolean inUse;
+	
+	public Table(Server server, String tableInfo) {
+		setServer(server);
+		setTableInfo(tableInfo);
+	}
+	
 	@Override
 	public String getTableInfo() {
 		// TODO Auto-generated method stub
@@ -12,26 +20,36 @@ public class Table implements TableInterface {
 
 	@Override
 	public Server getServer() {
-		// TODO Auto-generated method stub
-		return null;
+		return server;
 	}
 
 	@Override
-	public boolean setServer(String newServerID) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean setServer(Server newServer) {
+		if (newServer == null) {
+			return false;
+		}
+		server = newServer;
+		return true;
 	}
 
 	@Override
-	public boolean setToInUse(String serverID) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean setToInUse(Server server) {
+		if (server == null) {
+			return false;
+		}
+		inUse = true;
+		return setServer(server);
 	}
 
 	@Override
-	public boolean setToReady() {
+	public void setToReady() {
+		server = null;
+		inUse = false;
+	}
+
+	private void setTableInfo(String tableInfo) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 }
