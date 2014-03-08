@@ -72,6 +72,7 @@ public class RestaurantController implements RestaurantControllerInterface{
 		return restaurant.authenticate(passcode);
 	}
 	
+	//will be called by view on exit
 	public void dumpToFile() {
 		restaurant.dumpToFile();
 	}

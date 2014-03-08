@@ -9,6 +9,7 @@ public class Restaurant implements RestaurantInterface {
 	
 	public Restaurant() {
 		restaurantStatistics = new RestaurantStatistics();
+		//passes restaurantStatistics for initial populate from file
 		storageSupport = new StorageSupport(restaurantStatistics);
 	}
 	

@@ -9,20 +9,28 @@ import java.util.Scanner;
 
 public class Storage {
 	
+	//management passcode move to statistics?
 	private String managementPasscode = "password";
+	//stores restaurants servers
 	private HashMap<String, Server> servers = new HashMap<String, Server>();
+	//stores restaurants tables
 	private ArrayList<Table> tables = new ArrayList<Table>();
+	//constants for data populate and dump.
 	private static final String SERVER_FILE_CONSTANT = "restaurant_server_data.txt";
 	private static final String TABLE_FILE_CONSTANT = "restaurant_table_data.txt";
 	private static final String STATISTICS_FILE_CONSTANT = "restaurant_statistics_data.txt";
 	private static final String FILE_TYPE_CONSTANT = "UTF-8";
 	
-	
 	public Storage(RestaurantStatistics restaurantStatistics) {
 		populate(restaurantStatistics);
 	}
 	
+	/**
+	 * fills servers, tables and restaurant statistics with data from the txt files.
+	 * @param restaurantStatistics
+	 */
 	private void populate(RestaurantStatistics restaurantStatistics) {
+		//fills servers
 		File file = new File(SERVER_FILE_CONSTANT);
 		Scanner scanner = null;
 		try {
@@ -38,6 +46,7 @@ public class Storage {
 			servers.put(server.getServerID(), server);
 		}
 		
+		//fills tables
 		file = new File(TABLE_FILE_CONSTANT);
 		try {
 			scanner = new Scanner(file);
@@ -56,6 +65,7 @@ public class Storage {
 			}
 		}
 		
+		//fills statistics
 		file = new File(STATISTICS_FILE_CONSTANT);
 		try {
 			scanner = new Scanner(file);
@@ -69,7 +79,12 @@ public class Storage {
 		
 	}
 
+	/**
+	 * dumps all restaurant data to be saved to 3 different text files.
+	 * @param restaurantStatistics
+	 */
 	public void dumpToFile(RestaurantStatistics restaurantStatistics) {
+		//writes server information to file
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(SERVER_FILE_CONSTANT, FILE_TYPE_CONSTANT);
@@ -82,6 +97,7 @@ public class Storage {
 		}
 		writer.close();
 		
+		//writes table information to file
 		try {
 			writer = new PrintWriter(TABLE_FILE_CONSTANT, FILE_TYPE_CONSTANT);
 		} catch (Exception e) {
@@ -100,13 +116,14 @@ public class Storage {
 			}
 		}
 		writer.close();
+		
+		//writes statistics to file
 		try {
 			writer = new PrintWriter(STATISTICS_FILE_CONSTANT, FILE_TYPE_CONSTANT);
 		} catch (Exception e) {
 			System.out.println("writer create error for statistics file");
 		}
 		writer.println(restaurantStatistics.getTableCount());
-		
 		writer.close();
 	}
 

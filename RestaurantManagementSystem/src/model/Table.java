@@ -5,6 +5,7 @@ import interfaces.TableInterface;
 public class Table implements TableInterface {
 
 	private Server server = null;
+	//true if in use, false if ready for use
 	private boolean inUse;
 	
 	public Table(Server server, String tableInfo) {
