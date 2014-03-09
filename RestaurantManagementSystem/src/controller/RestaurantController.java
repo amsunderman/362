@@ -53,14 +53,12 @@ public class RestaurantController implements RestaurantControllerInterface{
 
 	@Override
 	public boolean submitFeedback(String serverID, String feedback, boolean good) {
-		// TODO Auto-generated method stub
-		return false;
+		return restaurant.submitFeedback(serverID, feedback, good);
 	}
 
 	@Override
 	public String getServerFeedback(String serverID) {
-		// TODO Auto-generated method stub
-		return null;
+		return restaurant.getServerFeedback(serverID);
 	}
 
 	@Override

@@ -120,14 +120,15 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean submitFeedback(String serverID, String feedback, boolean good) {
-		// TODO Auto-generated method stub
-		return false;
+		Server s = storageSupport.getServer(serverID);
+		boolean b = s.submitFeedback(feedback, good);
+		return b;
 	}
 
 	@Override
 	public String getServerFeedback(String serverID) {
-		// TODO Auto-generated method stub
-		return null;
+		Server s = storageSupport.getServer(serverID);
+		return s.getFeedback();
 	}
 
 	@Override

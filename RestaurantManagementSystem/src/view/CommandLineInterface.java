@@ -148,13 +148,13 @@ public class CommandLineInterface {
 						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
 						if(controller.authenticate(passcode)) {
 							authenticated = true;
-							serverID = JOptionPane.showInputDialog("Enter serverID");
-							String serverFeedback = controller.getServerFeedback(serverID);
-							// TODO output the server's feedback in the desired way
 						} else {
 							System.out.println("Incorrect Passcode");
 						}
 					}
+					serverID = JOptionPane.showInputDialog("Enter serverID");
+					String serverFeedback = controller.getServerFeedback(serverID);
+					System.out.println(serverFeedback);
 					break;
 					
 				//view a list of server id's and the # of tables they are servicing
