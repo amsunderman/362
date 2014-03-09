@@ -46,6 +46,7 @@ public class Restaurant implements RestaurantInterface {
 				}
 			}
 		}
+		restaurantStatistics.updateTableCount(newTableCount);
 		return true;
 	}
 
@@ -63,6 +64,10 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public String getTableInfo(int tableNumber) {
 		Table t = storageSupport.getTable(tableNumber);
+		if(t == null)
+		{
+			return null;
+		}
 		return t.getTableInfo();
 	}
 
@@ -121,8 +126,7 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public boolean submitFeedback(String serverID, String feedback, boolean good) {
 		Server s = storageSupport.getServer(serverID);
-		boolean b = s.submitFeedback(feedback, good);
-		return b;
+		return s.submitFeedback(feedback, good);
 	}
 
 	@Override

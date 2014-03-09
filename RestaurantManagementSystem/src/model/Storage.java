@@ -56,16 +56,14 @@ public class Storage {
 			int tableCount = 1;
 			while (scanner.hasNext()) {
 				tableInfo = scanner.nextLine();
-				serverID = scanner.next();
-				if (servers.get(serverID) != null && tableInfo != null) {
-					table = new Table(tableCount, servers.get(serverID), tableInfo);
-					if(tableInfo.contains("in use."))
-					{
-						table.setToInUse(servers.get(serverID));
-					}
-					tables.add(table);
-					tableCount++;
+				serverID = scanner.nextLine();
+				table = new Table(tableCount, servers.get(serverID), tableInfo);
+				if(tableInfo.contains(": in use."))
+				{
+					table.setToInUse(servers.get(serverID));
 				}
+				tables.add(table);
+				tableCount++;
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in table data file read");

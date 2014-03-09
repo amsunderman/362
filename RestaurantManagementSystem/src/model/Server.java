@@ -44,14 +44,14 @@ public class Server implements ServerInterface {
 		ret += "Good: \n";
 		for(int i=0; i<goodFeedback.size(); i++)
 		{
-			ret += i + ". " + goodFeedback.get(i) + "\n";
+			ret += (i+1) + ". " + goodFeedback.get(i) + "\n";
 		}
 		
 		ret += "\n" + "Bad: \n";
 		
 		for(int i=0; i<badFeedback.size(); i++)
 		{
-			ret += i + ". " + badFeedback.get(i);
+			ret += (i+1) + ". " + badFeedback.get(i);
 			if(i != badFeedback.size() - 1)
 			{
 				ret += "\n";
