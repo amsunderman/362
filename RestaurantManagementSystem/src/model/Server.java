@@ -40,13 +40,14 @@ public class Server implements ServerInterface {
 
 	@Override
 	public String getFeedback() {
-		String ret = "Server " + serverID + " feedback:/n";
-		ret += "Good: /n";
+		String ret = "Server " + serverID + " feedback:\n";
+		ret += "Good: \n";
 		for(int i=0; i<goodFeedback.size(); i++)
 		{
-			ret += i + ". " + goodFeedback.get(i) + "/n";
+			ret += i + ". " + goodFeedback.get(i) + "\n";
 		}
-		ret += "/n" + "Bad: /n";
+		
+		ret += "\n" + "Bad: \n";
 		
 		for(int i=0; i<badFeedback.size(); i++)
 		{

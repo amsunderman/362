@@ -24,8 +24,7 @@ public class StorageSupport implements StorageSupportInterface{
 
 	@Override
 	public boolean deleteServer(String serverID) {
-		storage.deleteServer(serverID);
-		return true;
+		return storage.deleteServer(serverID);
 	}
 
 	@Override

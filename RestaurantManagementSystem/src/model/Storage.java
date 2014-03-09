@@ -154,8 +154,11 @@ public class Storage {
 		return tables;
 	}
 
-	public void deleteServer(String serverID) {
+	public boolean deleteServer(String serverID) {
+		if(!servers.containsKey(serverID))
+			return false;
 		servers.remove(serverID);
+		return true;
 	}
 
 	public boolean addServer(Server s) {
