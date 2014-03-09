@@ -1,0 +1,24 @@
+Nels
+0
+<GOOD>
+Knows what he is doing.
+Talks Physics like a champ.
+</GOOD>
+<BAD>
+</BAD>
+Kyle
+0
+<GOOD>
+Wonderful
+</GOOD>
+<BAD>
+Forgot to thank me for dining.
+</BAD>
+Adam
+0
+<GOOD>
+Great.
+</GOOD>
+<BAD>
+Terrible.
+</BAD>

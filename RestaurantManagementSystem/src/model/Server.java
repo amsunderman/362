@@ -8,8 +8,8 @@ public class Server implements ServerInterface {
 
 	private String serverID;
 	private int tableCount = 0;
-	ArrayList<String> goodFeedback = new ArrayList<String>();
-	ArrayList<String> badFeedback = new ArrayList<String>();
+	public ArrayList<String> goodFeedback = new ArrayList<String>();
+	public ArrayList<String> badFeedback = new ArrayList<String>();
 	
 	
 	public Server(String serverID) {
@@ -47,7 +47,7 @@ public class Server implements ServerInterface {
 			ret += (i+1) + ". " + goodFeedback.get(i) + "\n";
 		}
 		
-		ret += "\n" + "Bad: \n";
+		ret += "Bad: \n";
 		
 		for(int i=0; i<badFeedback.size(); i++)
 		{

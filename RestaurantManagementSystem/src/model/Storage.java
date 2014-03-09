@@ -39,6 +39,28 @@ public class Storage {
 			while(scanner.hasNext()) {
 				server = new Server(scanner.nextLine());
 				server.setTableCount(Integer.parseInt(scanner.nextLine()));
+				String fb = scanner.nextLine();
+				while(!fb.contains("</GOOD>"))
+				{
+					if(fb.contains("<GOOD>"))
+						fb = scanner.nextLine();
+					else
+					{
+						server.submitFeedback(fb, true);
+						fb = scanner.nextLine();
+					}
+				}
+				fb = scanner.nextLine();
+				while(!fb.contains("</BAD>"))
+				{
+					if(fb.contains("<BAD>"))
+						fb = scanner.nextLine();
+					else
+					{
+						server.submitFeedback(fb, false);
+						fb = scanner.nextLine();
+					}
+				}
 				servers.put(server.getServerID(), server);
 			}
 		} catch (FileNotFoundException e) {
@@ -100,6 +122,18 @@ public class Storage {
 		for (Server server : servers.values()) {
 			writer.println(server.getServerID());
 			writer.println(server.getTableCount());
+			writer.println("<GOOD>");
+			for(String fb : server.goodFeedback)
+			{
+				writer.println(fb);
+			}
+			writer.println("</GOOD>");
+			writer.println("<BAD>");
+			for(String fb : server.badFeedback)
+			{
+				writer.println(fb);
+			}
+			writer.println("</BAD>");
 		}
 		writer.close();
 		
