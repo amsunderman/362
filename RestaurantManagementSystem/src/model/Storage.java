@@ -35,48 +35,50 @@ public class Storage {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(file);
+			Server server;
+			while(scanner.hasNext()) {
+				server = new Server(scanner.nextLine());
+				server.setTableCount(Integer.parseInt(scanner.nextLine()));
+				servers.put(server.getServerID(), server);
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in server data file read");
-			e.printStackTrace();
-		}
-		Server server;
-		while(scanner.hasNext()) {
-			server = new Server(scanner.nextLine());
-			server.setTableCount(Integer.parseInt(scanner.nextLine()));
-			servers.put(server.getServerID(), server);
+			//uncomment if you want to see stack trace for file not existing
+//			e.printStackTrace();
 		}
 		
 		//fills tables
 		file = new File(TABLE_FILE_CONSTANT);
 		try {
 			scanner = new Scanner(file);
+			Table table;
+			String serverID, tableInfo;
+			while (scanner.hasNext()) {
+				tableInfo = scanner.next();
+				serverID = scanner.next();
+				if (servers.get(serverID) != null && tableInfo != null) {
+					table = new Table(servers.get(serverID), tableInfo);
+					tables.add(table);
+				}
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in table data file read");
-			e.printStackTrace();
-		}
-		Table table;
-		String serverID, tableInfo;
-		while (scanner.hasNext()) {
-			tableInfo = scanner.next();
-			serverID = scanner.next();
-			if (servers.get(serverID) != null && tableInfo != null) {
-				table = new Table(servers.get(serverID), tableInfo);
-				tables.add(table);
-			}
+			//uncomment if you want to see stack trace for file not existing
+//			e.printStackTrace();
 		}
 		
 		//fills statistics
 		file = new File(STATISTICS_FILE_CONSTANT);
 		try {
 			scanner = new Scanner(file);
+			while (scanner.hasNext()) {
+				restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in statistics data file read");
-			e.printStackTrace();
+			//uncomment if you want to see stack trace for file not existing
+//			e.printStackTrace();
 		}
-		while (scanner.hasNext()) {
-			restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
-		}
-		
 	}
 
 	/**
