@@ -55,13 +55,13 @@ public class CommandLineInterface {
 						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
 						if(controller.authenticate(passcode)) {
 							authenticated = true;
-							int newTableCount=Integer.parseInt(JOptionPane.showInputDialog("Enter new table count"));
-							b= controller.editTableCount(newTableCount);
-							System.out.println("Operation success boolean is "+b);
 						} else {
 							System.out.println("Incorrect Passcode");
 						}
 					}
+					int newTableCount=Integer.parseInt(JOptionPane.showInputDialog("Enter new table count"));
+					b= controller.editTableCount(newTableCount);
+					System.out.println("Operation success boolean is "+b);
 					break;
 					
 				//add server
@@ -70,13 +70,13 @@ public class CommandLineInterface {
 						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
 						if(controller.authenticate(passcode)) {
 							authenticated = true;
-							serverID =JOptionPane.showInputDialog("Enter serverID");
-							b= controller.addServer(serverID);
-							System.out.println("Operation success boolean is "+b);
 						} else {
 							System.out.println("Incorrect Passcode");
 						}
 					}
+					serverID =JOptionPane.showInputDialog("Enter serverID");
+					b= controller.addServer(serverID);
+					System.out.println("Operation success boolean is "+b);
 					break;
 					
 				//delete server
@@ -85,20 +85,20 @@ public class CommandLineInterface {
 						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
 						if(controller.authenticate(passcode)) {
 							authenticated = true;
-							serverID = JOptionPane.showInputDialog("Enter serverID");
-							b= controller.deleteServer(serverID);
-							System.out.println("Operation success boolean is "+b);
 						} else {
 							System.out.println("Incorrect Passcode");
 						}
 					}
+					serverID = JOptionPane.showInputDialog("Enter serverID");
+					b= controller.deleteServer(serverID);
+					System.out.println("Operation success boolean is "+b);
 					break;
 					
 				//check table information
 				case 4:
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Table Number"));
 					String tableInfo = controller.getTableInfo(tableNumber);
-					// TODO output tableInfo in desired way
+					System.out.println(tableInfo);
 					break;
 					
 				//change table's assigned server

@@ -21,8 +21,24 @@ public class Table implements TableInterface {
 	
 	@Override
 	public String getTableInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		String ret = "Table " + tableNumber + " info: ";
+		if(inUse)
+		{
+			ret += "in use. ";
+		}
+		else
+		{
+			ret += "not in use. ";
+		}
+		if(server != null)
+		{
+			ret += "assigned to " + server.getServerID() + ".";
+		}
+		else
+		{
+			ret += "no one assigned.";
+		}
+		return ret;
 	}
 
 	@Override
