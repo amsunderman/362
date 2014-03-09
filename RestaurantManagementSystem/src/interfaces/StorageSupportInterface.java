@@ -7,7 +7,7 @@ import model.Table;
 
 public interface StorageSupportInterface {
 	boolean authenticatePasscode(String passcode);
-	boolean addServer(String serverID);
+	boolean addServer(Server s);
 	boolean deleteServer(String serverID);
 	Table getTable(int tableNumber);
 	ArrayList<Table> getAllTables();

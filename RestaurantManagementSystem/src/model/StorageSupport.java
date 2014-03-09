@@ -18,8 +18,8 @@ public class StorageSupport implements StorageSupportInterface{
 	}
 
 	@Override
-	public boolean addServer(String serverID) {
-		return storage.addServer(serverID);
+	public boolean addServer(Server s) {
+		return storage.addServer(s);
 	}
 
 	@Override

@@ -154,12 +154,11 @@ public class Storage {
 		servers.remove(serverID);
 	}
 
-	public boolean addServer(String serverID) {
-		if (servers.get(serverID) != null) {
+	public boolean addServer(Server s) {
+		if (servers.get(s.getServerID()) != null) {
 			return false;
 		}
-		Server server = new Server(serverID);
-		servers.put(serverID, server);
+		servers.put(s.getServerID(), s);
 		return true;
 	}
 	

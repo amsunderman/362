@@ -51,7 +51,8 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean addServer(String serverID) {
-		return storageSupport.addServer(serverID);
+		Server s = new Server(serverID);
+		return storageSupport.addServer(s);
 	}
 
 	@Override
