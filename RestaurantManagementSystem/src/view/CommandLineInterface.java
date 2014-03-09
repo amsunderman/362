@@ -128,7 +128,7 @@ public class CommandLineInterface {
 				case 8:
 					serverID = JOptionPane.showInputDialog("Enter serverID");
 					String serverTables = controller.getServerTables(serverID);
-					// TODO output the server's tables in the desired way
+					System.out.println(serverTables);
 					break;
 					
 				//submit server feedback

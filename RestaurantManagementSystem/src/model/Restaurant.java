@@ -110,14 +110,15 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public String getServerTables(String serverID) {
-		String ret = "";
+		String ret = "Server " + serverID + " tables: ";
 		ArrayList<Table> allTables = storageSupport.getAllTables();
 		for(Table t : allTables)
 		{
 			Server s = t.getServer();
-			if(s.getServerID().equals(serverID))
+			if(s == null);
+			else if(s.getServerID().equals(serverID))
 			{
-				ret.concat(t.getTableInfo() + " ");
+				ret += t.getTableNumber() + " ";
 			}
 		}
 		return ret;
