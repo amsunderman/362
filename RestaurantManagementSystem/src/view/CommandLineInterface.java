@@ -9,6 +9,7 @@ public class CommandLineInterface {
 		RestaurantController controller = new RestaurantController();
 		try {
 			boolean loop = true;
+			boolean authenticated = false;
 			while (loop) {
 				String operationNumber=JOptionPane.showInputDialog(
 				    "Enter operation number \n"+
@@ -44,29 +45,53 @@ public class CommandLineInterface {
 				//variables for upcoming switch statement
 				int code = Integer.parseInt(operationNumber);
 				boolean b;
-				String serverID = null;
+				String serverID, passcode = null;
 				int tableNumber = -1;
 				
 				switch(code) {
 				//edit Table Count
 				case 1:
-					int newTableCount=Integer.parseInt(JOptionPane.showInputDialog("Enter new table count"));
-					b= controller.editTableCount(newTableCount);
-					System.out.println("Operation success boolean is "+b);
+					while (!authenticated) {
+						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
+						if(controller.authenticate(passcode)) {
+							authenticated = true;
+							int newTableCount=Integer.parseInt(JOptionPane.showInputDialog("Enter new table count"));
+							b= controller.editTableCount(newTableCount);
+							System.out.println("Operation success boolean is "+b);
+						} else {
+							System.out.println("Incorrect Passcode");
+						}
+					}
 					break;
 					
 				//add server
 				case 2:
-					serverID =JOptionPane.showInputDialog("Enter serverID");
-					b= controller.addServer(serverID);
-					System.out.println("Operation success boolean is "+b);
+					while (!authenticated) {
+						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
+						if(controller.authenticate(passcode)) {
+							authenticated = true;
+							serverID =JOptionPane.showInputDialog("Enter serverID");
+							b= controller.addServer(serverID);
+							System.out.println("Operation success boolean is "+b);
+						} else {
+							System.out.println("Incorrect Passcode");
+						}
+					}
 					break;
 					
 				//delete server
 				case 3:
-					serverID = JOptionPane.showInputDialog("Enter serverID");
-					b= controller.deleteServer(serverID);
-					System.out.println("Operation success boolean is "+b);
+					while (!authenticated) {
+						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
+						if(controller.authenticate(passcode)) {
+							authenticated = true;
+							serverID = JOptionPane.showInputDialog("Enter serverID");
+							b= controller.deleteServer(serverID);
+							System.out.println("Operation success boolean is "+b);
+						} else {
+							System.out.println("Incorrect Passcode");
+						}
+					}
 					break;
 					
 				//check table information
@@ -119,9 +144,17 @@ public class CommandLineInterface {
 					
 				//check server feedback
 				case 10:
-					serverID = JOptionPane.showInputDialog("Enter serverID");
-					String serverFeedback = controller.getServerFeedback(serverID);
-					// TODO output the server's feedback in the desired way
+					while (!authenticated) {
+						passcode =JOptionPane.showInputDialog("Enter Management Passcode");
+						if(controller.authenticate(passcode)) {
+							authenticated = true;
+							serverID = JOptionPane.showInputDialog("Enter serverID");
+							String serverFeedback = controller.getServerFeedback(serverID);
+							// TODO output the server's feedback in the desired way
+						} else {
+							System.out.println("Incorrect Passcode");
+						}
+					}
 					break;
 					
 				//view a list of server id's and the # of tables they are servicing

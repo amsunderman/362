@@ -17,7 +17,36 @@ public class Restaurant implements RestaurantInterface {
 	
 	@Override
 	public boolean editTableCount(int newTableCount) {
-		return restaurantStatistics.updateTableCount(newTableCount);
+		if (newTableCount < 0) {
+			return false;
+		}
+		int oldTableCount = restaurantStatistics.getTableCount();
+		if (oldTableCount == -1) {
+			for (int i = 1; i <= newTableCount; i++) {
+				if(!storageSupport.addTable(new Table(i))) {
+					return false;
+				}
+			}
+		}
+		else if (oldTableCount != newTableCount && restaurantStatistics.updateTableCount(newTableCount)) {
+			if (newTableCount > oldTableCount) {
+				//add extra tables
+				while (newTableCount != oldTableCount) {
+					if(!storageSupport.addTable(new Table(oldTableCount+1))) {
+						return false;
+					}
+					oldTableCount++;
+				}
+			} else {
+				while (newTableCount != oldTableCount) {
+					if(!storageSupport.deleteTable(oldTableCount)) {
+						return false;
+					}
+					oldTableCount--;
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override

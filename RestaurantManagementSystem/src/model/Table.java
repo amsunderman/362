@@ -4,13 +4,19 @@ import interfaces.TableInterface;
 
 public class Table implements TableInterface {
 
+	private int tableNumber;
 	private Server server = null;
 	//true if in use, false if ready for use
-	private boolean inUse;
+	private boolean inUse = false;
 	
-	public Table(Server server, String tableInfo) {
+	public Table(int tableNumber, Server server, String tableInfo) {
+		this.tableNumber = tableNumber;
 		setServer(server);
 		setTableInfo(tableInfo);
+	}
+	
+	public Table(int tableNumber) {
+		this.tableNumber = tableNumber;
 	}
 	
 	@Override
@@ -47,10 +53,14 @@ public class Table implements TableInterface {
 		server = null;
 		inUse = false;
 	}
+	
+	public int getTableNumber() {
+		return tableNumber;
+	}
 
 	private void setTableInfo(String tableInfo) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

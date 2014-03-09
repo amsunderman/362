@@ -53,12 +53,14 @@ public class Storage {
 			scanner = new Scanner(file);
 			Table table;
 			String serverID, tableInfo;
+			int tableCount = 1;
 			while (scanner.hasNext()) {
 				tableInfo = scanner.next();
 				serverID = scanner.next();
 				if (servers.get(serverID) != null && tableInfo != null) {
-					table = new Table(servers.get(serverID), tableInfo);
+					table = new Table(tableCount, servers.get(serverID), tableInfo);
 					tables.add(table);
+					tableCount++;
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -141,7 +143,7 @@ public class Storage {
 		if (tableNumber < 0 || tableNumber > tables.size()) {
 			return null;
 		}
-		return tables.get(tableNumber);
+		return tables.get(tableNumber-1);
 	}
 
 	public ArrayList<Table> getAllTables() {
@@ -158,6 +160,22 @@ public class Storage {
 		}
 		Server server = new Server(serverID);
 		servers.put(serverID, server);
+		return true;
+	}
+	
+	public boolean addTable(Table table) {
+		if (tables.size()+1 != table.getTableNumber()) {
+			return false;
+		}
+		tables.add(table);
+		return true;
+	}
+	
+	public boolean deleteTable(int tableNumber) {
+		if (tables.size() < tableNumber) {
+			return false;
+		}
+		tables.remove(tableNumber-1);
 		return true;
 	}
 

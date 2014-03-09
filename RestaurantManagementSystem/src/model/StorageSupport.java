@@ -46,5 +46,13 @@ public class StorageSupport implements StorageSupportInterface{
 	public void dumpToFile(RestaurantStatistics restaurantStatistics) {
 		storage.dumpToFile(restaurantStatistics);
 	}
+	
+	public boolean addTable(Table table) {
+		return storage.addTable(table);
+	}
+	
+	public boolean deleteTable(int tableNumber) {
+		return storage.deleteTable(tableNumber);
+	}
 
 }
