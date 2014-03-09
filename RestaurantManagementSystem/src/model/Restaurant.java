@@ -133,6 +133,8 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public String getServerFeedback(String serverID) {
 		Server s = storageSupport.getServer(serverID);
+		if(s==null)
+			return null;
 		return s.getFeedback();
 	}
 
