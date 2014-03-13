@@ -18,8 +18,8 @@ public class StorageSupport implements StorageSupportInterface{
 	}
 
 	@Override
-	public boolean addServer(Server s) {
-		return storage.addServer(s);
+	public boolean putServer(Server s) {
+		return storage.putServer(s);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class StorageSupport implements StorageSupportInterface{
 		storage.dumpToFile(restaurantStatistics);
 	}
 	
-	public boolean addTable(Table table) {
-		return storage.addTable(table);
+	public boolean putTable(Table table) {
+		return storage.putTable(table);
 	}
 	
 	public boolean deleteTable(int tableNumber) {

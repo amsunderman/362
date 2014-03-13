@@ -79,7 +79,7 @@ public class Storage {
 			while (scanner.hasNext()) {
 				tableInfo = scanner.nextLine();
 				serverID = scanner.nextLine();
-				table = new Table(tableCount, servers.get(serverID), tableInfo);
+				table = new Table(tableCount, servers.get(serverID));
 				if(tableInfo.contains(": in use."))
 				{
 					table.setToInUse(servers.get(serverID));
@@ -193,7 +193,7 @@ public class Storage {
 		return true;
 	}
 
-	public boolean addServer(Server s) {
+	public boolean putServer(Server s) {
 		if (servers.get(s.getServerID()) != null) {
 			return false;
 		}
@@ -201,7 +201,7 @@ public class Storage {
 		return true;
 	}
 	
-	public boolean addTable(Table table) {
+	public boolean putTable(Table table) {
 		if (tables.size()+1 != table.getTableNumber()) {
 			return false;
 		}

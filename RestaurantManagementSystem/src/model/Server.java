@@ -1,8 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import interfaces.ServerInterface;
+
+import java.util.ArrayList;
 
 public class Server implements ServerInterface {
 

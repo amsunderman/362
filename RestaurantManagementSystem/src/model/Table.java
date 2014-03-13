@@ -9,10 +9,9 @@ public class Table implements TableInterface {
 	//true if in use, false if ready for use
 	private boolean inUse = false;
 	
-	public Table(int tableNumber, Server server, String tableInfo) {
+	public Table(int tableNumber, Server server) {
 		this.tableNumber = tableNumber;
 		setServer(server);
-		setTableInfo(tableInfo);
 	}
 	
 	public Table(int tableNumber) {
@@ -72,11 +71,6 @@ public class Table implements TableInterface {
 	
 	public int getTableNumber() {
 		return tableNumber;
-	}
-
-	private void setTableInfo(String tableInfo) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

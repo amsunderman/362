@@ -23,7 +23,7 @@ public class Restaurant implements RestaurantInterface {
 		int oldTableCount = restaurantStatistics.getTableCount();
 		if (oldTableCount == -1) {
 			for (int i = 1; i <= newTableCount; i++) {
-				if(!storageSupport.addTable(new Table(i))) {
+				if(!storageSupport.putTable(new Table(i))) {
 					return false;
 				}
 			}
@@ -32,7 +32,7 @@ public class Restaurant implements RestaurantInterface {
 			if (newTableCount > oldTableCount) {
 				//add extra tables
 				while (newTableCount != oldTableCount) {
-					if(!storageSupport.addTable(new Table(oldTableCount+1))) {
+					if(!storageSupport.putTable(new Table(oldTableCount+1))) {
 						return false;
 					}
 					oldTableCount++;
@@ -53,7 +53,7 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public boolean addServer(String serverID) {
 		Server s = new Server(serverID);
-		return storageSupport.addServer(s);
+		return storageSupport.putServer(s);
 	}
 
 	@Override
