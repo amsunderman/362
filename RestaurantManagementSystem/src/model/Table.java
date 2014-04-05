@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import interfaces.TableInterface;
 
 public class Table implements TableInterface {
@@ -8,6 +9,7 @@ public class Table implements TableInterface {
 	private Server server = null;
 	//true if in use, false if ready for use
 	private boolean inUse = false;
+	private HashMap<Integer, Order> orders = new HashMap<Integer, Order>();
 	
 	public Table(int tableNumber, Server server) {
 		this.tableNumber = tableNumber;
@@ -73,4 +75,9 @@ public class Table implements TableInterface {
 		return tableNumber;
 	}
 	
+	public boolean putOrder(Order o) {
+		Integer ID = new Integer(o.getID());
+		orders.put(ID,o);
+		return true;
+	}
 }

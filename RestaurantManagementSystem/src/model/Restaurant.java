@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+
 import interfaces.RestaurantInterface;
 
 public class Restaurant implements RestaurantInterface {
 	
 	private StorageSupport storageSupport = null;
 	private RestaurantStatistics restaurantStatistics = null;
+	private int orderID = 0;
 	
 	public Restaurant() {
 		restaurantStatistics = new RestaurantStatistics();
@@ -136,6 +138,17 @@ public class Restaurant implements RestaurantInterface {
 		if(s==null)
 			return null;
 		return s.getFeedback();
+	}
+	
+	@Override
+	public boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special) {
+		Table t = storageSupport.getTable(tableNumber);
+		if (t == null)
+			return false;
+		orderID++;
+		Order o = new Order(orderID, drink, appetizer, meal, side, special);
+		t.putOrder(o);
+		return storageSupport.putTable(t);
 	}
 
 	@Override

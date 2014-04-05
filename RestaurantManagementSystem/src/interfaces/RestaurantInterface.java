@@ -11,5 +11,6 @@ public interface RestaurantInterface {
 	String getServerTables(String serverID);
 	boolean submitFeedback(String serverID, String feedback, boolean good);
 	String getServerFeedback(String serverID);
+	boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special);
 	boolean authenticate(String passcode);
 }

@@ -60,6 +60,7 @@ public class RestaurantController implements RestaurantControllerInterface{
 	public String getServerFeedback(String serverID) {
 		return restaurant.getServerFeedback(serverID);
 	}
+	
 
 	@Override
 	public boolean authenticate(String passcode) {
@@ -69,6 +70,12 @@ public class RestaurantController implements RestaurantControllerInterface{
 	//will be called by view on exit
 	public void dumpToFile() {
 		restaurant.dumpToFile();
+	}
+
+	@Override
+	public boolean createOrder(int tableNumber, String drink,
+			String appetizer, String meal, String side, String special) {
+		return restaurant.createOrder(tableNumber, drink, appetizer, meal, side, special);
 	}
 
 }
