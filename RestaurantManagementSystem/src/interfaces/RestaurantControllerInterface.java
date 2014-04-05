@@ -12,5 +12,6 @@ public interface RestaurantControllerInterface {
 	boolean submitFeedback(String serverID, String feedback, boolean good);
 	String getServerFeedback(String serverID);
 	boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special);
+	boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue);
 	boolean authenticate(String passcode);
 }

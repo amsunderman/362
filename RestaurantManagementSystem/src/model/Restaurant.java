@@ -161,4 +161,30 @@ public class Restaurant implements RestaurantInterface {
 		storageSupport.dumpToFile(restaurantStatistics);
 	}
 
+
+	@Override
+	public boolean modifyOrder(int tableNumber, int orderID, String field,
+			String newvalue) {
+		Table t =  storageSupport.getTable(tableNumber);
+		if (t == null)
+			return false;
+		Order o = t.getOrder(orderID);
+		if (o == null)
+			return false;
+		if (field.equals("drink"))
+			o.modifyDrink(newvalue);
+		else if (field.equals("appetizer"))
+			o.modifyAppetizer(newvalue);
+		else if (field.equals("meal"))
+			o.modifyMeal(newvalue);
+		else if (field.equals("side"))
+			o.modifySide(newvalue);
+		else if (field.equals("special"))
+			o.modifySpecial(newvalue);
+		else
+			return false;
+		t.putOrder(o);
+		return storageSupport.putTable(t);
+	}
+
 }

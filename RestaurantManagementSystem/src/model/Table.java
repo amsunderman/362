@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+
 import interfaces.TableInterface;
 
 public class Table implements TableInterface {
@@ -79,5 +80,17 @@ public class Table implements TableInterface {
 		Integer ID = new Integer(o.getID());
 		orders.put(ID,o);
 		return true;
+	}
+	
+	public Order getOrder(int orderID)
+	{
+		Integer ID = new Integer(orderID);
+		if (orders.containsKey(ID))
+		{
+			return orders.get(ID);
+		}
+		else
+			return null;
+			
 	}
 }
