@@ -91,6 +91,17 @@ public class Table implements TableInterface {
 		}
 		else
 			return null;
-			
+	}
+	
+	public boolean deleteOrder(int orderID)
+	{
+		Integer ID = new Integer(orderID);
+		if (orders.containsKey(ID))
+		{
+			orders.remove(ID);
+			return true;
+		}
+		else
+			return false;
 	}
 }

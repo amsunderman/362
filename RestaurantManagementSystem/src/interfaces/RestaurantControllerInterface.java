@@ -13,5 +13,6 @@ public interface RestaurantControllerInterface {
 	String getServerFeedback(String serverID);
 	boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special);
 	boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue);
+	boolean deleteOrder(int tableNumber, int orderID);
 	boolean authenticate(String passcode);
 }

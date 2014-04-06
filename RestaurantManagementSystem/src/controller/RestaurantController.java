@@ -82,5 +82,11 @@ public class RestaurantController implements RestaurantControllerInterface{
 	public boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue) {
 		return restaurant.modifyOrder(tableNumber, orderID, field, newvalue);
 	}
+	
+	@Override
+	public boolean deleteOrder(int tableNumber, int orderID)
+	{
+		return restaurant.deleteOrder(tableNumber, orderID);
+	}
 
 }

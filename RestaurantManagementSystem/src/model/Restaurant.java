@@ -186,5 +186,14 @@ public class Restaurant implements RestaurantInterface {
 		t.putOrder(o);
 		return storageSupport.putTable(t);
 	}
-
+	
+	@Override
+	public boolean deleteOrder(int tableNumber, int orderID)
+	{
+		Table t = storageSupport.getTable(tableNumber);
+		if (t == null)
+			return false;
+		t.deleteOrder(orderID);
+		return storageSupport.putTable(t);
+	}
 }
