@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import interfaces.RestaurantInterface;
 
@@ -181,6 +183,8 @@ public class Restaurant implements RestaurantInterface {
 			o.modifySide(newvalue);
 		else if (field.equals("special"))
 			o.modifySpecial(newvalue);
+		else if (field.equals("status"))
+			o.modifyStatus(newvalue);
 		else
 			return false;
 		t.putOrder(o);
@@ -195,5 +199,33 @@ public class Restaurant implements RestaurantInterface {
 			return false;
 		t.deleteOrder(orderID);
 		return storageSupport.putTable(t);
+	}
+	
+	@Override
+	public ArrayList<Order> obtainOrderListByCreation()
+	{
+		ArrayList<Order> ret = new ArrayList<Order>();
+		ArrayList<Table> tables = storageSupport.getAllTables();
+		for (Table t : tables)
+		{
+			HashMap<Integer, Order> orders = t.getAllOrders();
+			for (Entry<Integer, Order> entry : orders.entrySet())
+			{
+				Order o = entry.getValue();
+				if(o.getStatus().equals("Ordered"))
+				{
+					for (int i = 0; i<ret.size(); i++)
+					{
+						if (ret.get(i).getTimestamp() <= o.getTimestamp())
+						{
+							ret.add(i,o);
+							break;
+						}
+						ret.add(o);
+					}	
+				}
+			}
+		}
+		return ret;
 	}
 }

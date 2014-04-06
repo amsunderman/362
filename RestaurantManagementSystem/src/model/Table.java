@@ -93,6 +93,11 @@ public class Table implements TableInterface {
 			return null;
 	}
 	
+	public HashMap<Integer, Order> getAllOrders()
+	{
+		return orders;
+	}
+	
 	public boolean deleteOrder(int orderID)
 	{
 		Integer ID = new Integer(orderID);
@@ -104,4 +109,5 @@ public class Table implements TableInterface {
 		else
 			return false;
 	}
+	
 }

@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import interfaces.RestaurantControllerInterface;
+import model.Order;
 import model.Restaurant;
 
 public class RestaurantController implements RestaurantControllerInterface{
@@ -87,6 +89,11 @@ public class RestaurantController implements RestaurantControllerInterface{
 	public boolean deleteOrder(int tableNumber, int orderID)
 	{
 		return restaurant.deleteOrder(tableNumber, orderID);
+	}
+
+	@Override
+	public ArrayList<Order> obtainOrderListByCreation() {
+		return restaurant.obtainOrderListByCreation();
 	}
 
 }
