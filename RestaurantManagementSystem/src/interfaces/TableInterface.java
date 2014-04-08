@@ -11,5 +11,11 @@ public interface TableInterface {
 	boolean setServer(Server newServer);
 	boolean setToInUse(Server server);
 	void setToReady();
+	int getTableNumber();
+	boolean putOrder(Order o);
+	Order getOrder(int orderID);
+	HashMap<Integer, Order> getAllOrders();
+	boolean deleteOrder(int orderID);
 	Set<Check> getAllChecks();
+	boolean addCheck(String orderString);
 }
