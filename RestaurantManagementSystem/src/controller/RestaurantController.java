@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+
 import interfaces.RestaurantControllerInterface;
 import model.Order;
 import model.Restaurant;
@@ -94,6 +95,21 @@ public class RestaurantController implements RestaurantControllerInterface{
 	@Override
 	public ArrayList<Order> obtainOrderListByCreation() {
 		return restaurant.obtainOrderListByCreation();
+	}
+
+	@Override
+	public String getServersAndNumberOfTables() {
+		return restaurant.getServersAndNumberOfTables();
+	}
+
+	@Override
+	public String getTablesChecks(int tableNumber) {
+		return restaurant.getTablesChecks(tableNumber);
+	}
+
+	@Override
+	public String getTablesOrders(int tableNumber) {
+		return restaurant.getTablesOrders(tableNumber);
 	}
 
 }

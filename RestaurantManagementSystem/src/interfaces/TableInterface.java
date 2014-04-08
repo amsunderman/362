@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.Set;
 
+import model.Check;
 import model.Server;
 
 public interface TableInterface {
