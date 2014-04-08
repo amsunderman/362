@@ -23,4 +23,5 @@ public interface RestaurantInterface {
 	String getServersAndNumberOfTables();
 	String getTablesChecks(int tableNumber);
 	String getTablesOrders(int tableNumber);
+	boolean generateChecks(int tableNumber, ArrayList<String> orders);
 }

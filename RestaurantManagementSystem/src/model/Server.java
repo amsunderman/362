@@ -22,7 +22,7 @@ public class Server implements ServerInterface {
 	}
 	
 	@Override
-	public boolean decrementServerTableCount() {
+	public boolean decrementTableCount() {
 		if (tableCount <= 0) {
 			return false;
 		}

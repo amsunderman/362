@@ -96,7 +96,7 @@ public class Restaurant implements RestaurantInterface {
 			return false;
 		}
 		Server server = table.getServer();
-		server.decrementServerTableCount();
+		server.decrementTableCount();
 		table.setServer(newServer);
 		newServer.incrementTableCount();
 		return true;
@@ -162,8 +162,7 @@ public class Restaurant implements RestaurantInterface {
 			return false;
 		orderID++;
 		Order o = new Order(orderID, drink, appetizer, meal, side, special);
-		t.putOrder(o);
-		return storageSupport.putTable(t);
+		return t.putOrder(o);
 	}
 
 	@Override
@@ -201,8 +200,7 @@ public class Restaurant implements RestaurantInterface {
 			o.modifyStatus(newvalue);
 		else
 			return false;
-		t.putOrder(o);
-		return storageSupport.putTable(t);
+		return t.putOrder(o);
 	}
 	
 	@Override
@@ -211,8 +209,7 @@ public class Restaurant implements RestaurantInterface {
 		Table t = storageSupport.getTable(tableNumber);
 		if (t == null)
 			return false;
-		t.deleteOrder(orderID);
-		return storageSupport.putTable(t);
+		return t.deleteOrder(orderID);
 	}
 	
 	@Override
@@ -235,7 +232,10 @@ public class Restaurant implements RestaurantInterface {
 							ret.add(i,o);
 							break;
 						}
-						ret.add(o);
+						else if (i == ret.size() - 1)
+						{
+							ret.add(o);
+						}
 					}	
 				}
 			}
@@ -280,5 +280,18 @@ public class Restaurant implements RestaurantInterface {
 			count++;
 		}
 		return returnString;
+	}
+
+	@Override
+	public boolean generateChecks(int tableNumber, ArrayList<String> orders) {
+		Table t = storageSupport.getTable(tableNumber);
+		if(t==null)
+			return false;
+		for(String oList : orders)
+		{
+			if(t.addCheck(oList) == false)
+				return false;
+		}
+		return true;
 	}
 }

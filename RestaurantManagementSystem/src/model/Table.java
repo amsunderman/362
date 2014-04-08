@@ -2,6 +2,7 @@ package model;
 
 import interfaces.TableInterface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public class Table implements TableInterface {
 	//true if in use, false if ready for use
 	private boolean inUse = false;
 	private HashMap<Integer, Order> orders = new HashMap<Integer, Order>();
+	private ArrayList<Check> checks = new ArrayList<Check>();
 	
 	public Table(int tableNumber, Server server) {
 		this.tableNumber = tableNumber;
@@ -73,16 +75,19 @@ public class Table implements TableInterface {
 		inUse = false;
 	}
 	
+	@Override
 	public int getTableNumber() {
 		return tableNumber;
 	}
 	
+	@Override
 	public boolean putOrder(Order o) {
 		Integer ID = new Integer(o.getID());
 		orders.put(ID,o);
 		return true;
 	}
 	
+	@Override
 	public Order getOrder(int orderID)
 	{
 		Integer ID = new Integer(orderID);
@@ -94,11 +99,13 @@ public class Table implements TableInterface {
 			return null;
 	}
 	
+	@Override
 	public HashMap<Integer, Order> getAllOrders()
 	{
 		return orders;
 	}
 	
+	@Override
 	public boolean deleteOrder(int orderID)
 	{
 		Integer ID = new Integer(orderID);
@@ -111,6 +118,13 @@ public class Table implements TableInterface {
 			return false;
 	}
 
+	@Override
+	public boolean addCheck(String orderString)
+	{
+		Check c = new Check(orderString);
+		return checks.add(c);
+	}
+	
 	@Override
 	public Set<Check> getAllChecks() {
 		// TODO Auto-generated method stub

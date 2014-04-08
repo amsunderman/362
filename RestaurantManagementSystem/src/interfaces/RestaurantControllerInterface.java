@@ -18,6 +18,7 @@ public interface RestaurantControllerInterface {
 	boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue);
 	boolean deleteOrder(int tableNumber, int orderID);
 	ArrayList<Order> obtainOrderListByCreation();
+	boolean generateChecks(int tableNumber, ArrayList<String> orders);
 	boolean authenticate(String passcode);
 	String getServersAndNumberOfTables();
 	String getTablesChecks(int tableNumber);

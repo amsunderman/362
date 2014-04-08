@@ -1,7 +1,7 @@
 package interfaces;
 
 public interface ServerInterface {
-	boolean decrementServerTableCount();
+	boolean decrementTableCount();
 	boolean submitFeedback(String feedback, boolean good);
 	String getFeedback();
 	String getServerID();

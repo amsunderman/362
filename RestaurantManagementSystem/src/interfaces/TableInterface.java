@@ -1,8 +1,10 @@
 package interfaces;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import model.Check;
+import model.Order;
 import model.Server;
 
 public interface TableInterface {

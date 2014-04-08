@@ -112,4 +112,9 @@ public class RestaurantController implements RestaurantControllerInterface{
 		return restaurant.getTablesOrders(tableNumber);
 	}
 
+	@Override
+	public boolean generateChecks(int tableNumber, ArrayList<String> orders) {
+		return restaurant.generateChecks(tableNumber, orders);
+	}
+
 }
