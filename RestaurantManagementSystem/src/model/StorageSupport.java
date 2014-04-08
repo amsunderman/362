@@ -3,6 +3,7 @@ package model;
 import interfaces.StorageSupportInterface;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class StorageSupport implements StorageSupportInterface{
 
@@ -52,6 +53,11 @@ public class StorageSupport implements StorageSupportInterface{
 	
 	public boolean deleteTable(int tableNumber) {
 		return storage.deleteTable(tableNumber);
+	}
+
+	@Override
+	public Set<Server> getServers() {
+		return storage.getServers();
 	}
 
 }

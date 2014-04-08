@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.Set;
+
 import model.Server;
 
 public interface TableInterface {
@@ -8,5 +10,5 @@ public interface TableInterface {
 	boolean setServer(Server newServer);
 	boolean setToInUse(Server server);
 	void setToReady();
-	
+	Set<Check> getAllChecks();
 }

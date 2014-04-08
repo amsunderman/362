@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Storage {
 	
@@ -215,6 +216,10 @@ public class Storage {
 		}
 		tables.remove(tableNumber-1);
 		return true;
+	}
+
+	public Set<Server> getServers() {
+		return (Set<Server>) servers.values();
 	}
 	
 }

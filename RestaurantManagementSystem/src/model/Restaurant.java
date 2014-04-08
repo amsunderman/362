@@ -1,16 +1,18 @@
 package model;
 
+import interfaces.RestaurantInterface;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-import interfaces.RestaurantInterface;
+import java.util.Set;
 
 public class Restaurant implements RestaurantInterface {
 	
 	private StorageSupport storageSupport = null;
 	private RestaurantStatistics restaurantStatistics = null;
 	private int orderID = 0;
+	private boolean authenticated = false;
 	
 	public Restaurant() {
 		restaurantStatistics = new RestaurantStatistics();
@@ -18,9 +20,11 @@ public class Restaurant implements RestaurantInterface {
 		storageSupport = new StorageSupport(restaurantStatistics);
 	}
 	
-	
 	@Override
 	public boolean editTableCount(int newTableCount) {
+		if (!authenticated) {
+			return false;
+		}
 		if (newTableCount < 0) {
 			return false;
 		}
@@ -56,12 +60,18 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean addServer(String serverID) {
+		if (!authenticated) {
+			return false;
+		}
 		Server s = new Server(serverID);
 		return storageSupport.putServer(s);
 	}
 
 	@Override
 	public boolean deleteServer(String serverID) {
+		if (!authenticated) {
+			return false;
+		}
 		return storageSupport.deleteServer(serverID);
 	}
 
@@ -136,6 +146,9 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public String getServerFeedback(String serverID) {
+		if (authenticated) {
+			return null;
+		}
 		Server s = storageSupport.getServer(serverID);
 		if(s==null)
 			return null;
@@ -155,7 +168,8 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public boolean authenticate(String passcode) {
-		return storageSupport.authenticatePasscode(passcode);
+		authenticated = storageSupport.authenticatePasscode(passcode);
+		return authenticated;
 	}
 
 
@@ -227,5 +241,44 @@ public class Restaurant implements RestaurantInterface {
 			}
 		}
 		return ret;
+	}
+
+
+	@Override
+	public String getServersAndNumberOfTables() {
+		Set<Server> servers = storageSupport.getServers();
+		String returnString = "";
+		for(Server server : servers) {
+			returnString += "Server ID: " + server.getServerID() + "\n Servicing: " + server.getTableCount() + " tables.\n\n";
+		}
+		return returnString;
+	}
+
+
+	@Override
+	public String getTablesChecks(int tableNumber) {
+		Table t = storageSupport.getTable(tableNumber);
+		Set<Check> checks = t.getAllChecks();
+		String returnString = "";
+		int count = 1;
+		for (Check check : checks) {
+			returnString += "Check " + count + ": " + check.toString();
+			count++;
+		}
+		return returnString;
+	}
+
+
+	@Override
+	public String getTablesOrders(int tableNumber) {
+		Table t = storageSupport.getTable(tableNumber);
+		Set<Order> orders = (Set<Order>) t.getAllOrders().values();
+		String returnString = "";
+		int count = 1;
+		for (Order order : orders) {
+			returnString += "Order " + count + ": " + order.toString();
+			count++;
+		}
+		return returnString;
 	}
 }

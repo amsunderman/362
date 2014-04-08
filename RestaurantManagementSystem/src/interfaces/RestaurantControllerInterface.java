@@ -19,4 +19,7 @@ public interface RestaurantControllerInterface {
 	boolean deleteOrder(int tableNumber, int orderID);
 	ArrayList<Order> obtainOrderListByCreation();
 	boolean authenticate(String passcode);
+	String getServersAndNumberOfTables();
+	String getTablesChecks(int tableNumber);
+	String getTablesOrders(int tableNumber);
 }

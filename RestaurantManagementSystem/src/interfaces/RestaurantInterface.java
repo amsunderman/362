@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.util.ArrayList;
+
 import model.Order;
 
 public interface RestaurantInterface {
@@ -19,4 +20,7 @@ public interface RestaurantInterface {
 	boolean deleteOrder(int tableNumber, int orderID);
 	ArrayList<Order> obtainOrderListByCreation();
 	boolean authenticate(String passcode);
+	String getServersAndNumberOfTables();
+	String getTablesChecks(int tableNumber);
+	String getTablesOrders(int tableNumber);
 }

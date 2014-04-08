@@ -1,8 +1,9 @@
 package model;
 
-import java.util.HashMap;
-
 import interfaces.TableInterface;
+
+import java.util.HashMap;
+import java.util.Set;
 
 public class Table implements TableInterface {
 
@@ -108,6 +109,12 @@ public class Table implements TableInterface {
 		}
 		else
 			return false;
+	}
+
+	@Override
+	public Set<Check> getAllChecks() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
