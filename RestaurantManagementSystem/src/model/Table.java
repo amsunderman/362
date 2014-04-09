@@ -5,7 +5,6 @@ import interfaces.TableInterface;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Table implements TableInterface {
 
@@ -137,9 +136,8 @@ public class Table implements TableInterface {
 	}
 	
 	@Override
-	public Set<Check> getAllChecks() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Check> getAllChecks() {
+		return checks;
 	}
 	
 }

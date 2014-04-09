@@ -153,7 +153,8 @@ public class CommandLineInterface {
 					
 				//view a list of server id's and the # of tables they are servicing
 				case 12:
-					
+					String serverList = controller.getServersAndNumberOfTables();
+					JOptionPane.showMessageDialog(null, serverList);
 					break;
 					
 				//create an order
@@ -235,12 +236,16 @@ public class CommandLineInterface {
 					
 				//obtain a list of checks for a table
 				case 18:
-					
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					String tableChecks = controller.getTablesChecks(tableNumber);
+					JOptionPane.showMessageDialog(null, tableChecks);
 					break;
 					
 				//obtain a list of orders for a table
 				case 19:
-					
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					String tableOrders = controller.getTablesOrders(tableNumber);
+					JOptionPane.showMessageDialog(null, tableOrders);
 					break;
 					
 				//view a list of tables with server action

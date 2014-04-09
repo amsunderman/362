@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Storage {
 	
@@ -264,8 +264,8 @@ public class Storage {
 		return true;
 	}
 
-	public Set<Server> getServers() {
-		return (Set<Server>) servers.values();
+	public Collection<Server> getServers() {
+		return servers.values();
 	}
 	
 }

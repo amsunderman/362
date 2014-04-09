@@ -1,7 +1,7 @@
 package interfaces;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import model.Check;
 import model.Order;
@@ -18,6 +18,6 @@ public interface TableInterface {
 	Order getOrder(int orderID);
 	HashMap<Integer, Order> getAllOrders();
 	boolean deleteOrder(int orderID);
-	Set<Check> getAllChecks();
+	ArrayList<Check> getAllChecks();
 	boolean addCheck(String orderString);
 }

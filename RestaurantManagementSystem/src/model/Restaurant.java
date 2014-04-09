@@ -3,6 +3,7 @@ package model;
 import interfaces.RestaurantInterface;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -248,10 +249,10 @@ public class Restaurant implements RestaurantInterface {
 
 	@Override
 	public String getServersAndNumberOfTables() {
-		Set<Server> servers = storageSupport.getServers();
+		Collection<Server> servers = storageSupport.getServers();
 		String returnString = "";
 		for(Server server : servers) {
-			returnString += "Server ID: " + server.getServerID() + "\n Servicing: " + server.getTableCount() + " tables.\n\n";
+			returnString += "Server ID: " + server.getServerID() + "\nServicing: " + server.getTableCount() + " tables.\n\n";
 		}
 		return returnString;
 	}
@@ -260,11 +261,11 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public String getTablesChecks(int tableNumber) {
 		Table t = storageSupport.getTable(tableNumber);
-		Set<Check> checks = t.getAllChecks();
+		ArrayList<Check> checks = t.getAllChecks();
 		String returnString = "";
 		int count = 1;
 		for (Check check : checks) {
-			returnString += "Check " + count + ": " + check.toString();
+			returnString += "Check " + count + ":\n" + check.toString() + "\n";
 			count++;
 		}
 		return returnString;
@@ -274,12 +275,10 @@ public class Restaurant implements RestaurantInterface {
 	@Override
 	public String getTablesOrders(int tableNumber) {
 		Table t = storageSupport.getTable(tableNumber);
-		Set<Order> orders = (Set<Order>) t.getAllOrders().values();
+		Collection<Order> orders = t.getAllOrders().values();
 		String returnString = "";
-		int count = 1;
 		for (Order order : orders) {
-			returnString += "Order " + count + ": " + order.toString();
-			count++;
+			returnString += "Order: " + order.toString() + "\n";
 		}
 		return returnString;
 	}

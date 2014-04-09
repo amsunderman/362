@@ -3,7 +3,7 @@ package model;
 import interfaces.StorageSupportInterface;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Collection;
 
 public class StorageSupport implements StorageSupportInterface{
 
@@ -56,7 +56,7 @@ public class StorageSupport implements StorageSupportInterface{
 	}
 
 	@Override
-	public Set<Server> getServers() {
+	public Collection<Server> getServers() {
 		return storage.getServers();
 	}
 
