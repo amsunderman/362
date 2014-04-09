@@ -217,26 +217,27 @@ public class Restaurant implements RestaurantInterface {
 	{
 		ArrayList<Order> ret = new ArrayList<Order>();
 		ArrayList<Table> tables = storageSupport.getAllTables();
+		boolean added;
 		for (Table t : tables)
 		{
 			HashMap<Integer, Order> orders = t.getAllOrders();
 			for (Entry<Integer, Order> entry : orders.entrySet())
 			{
+				added = false;
 				Order o = entry.getValue();
 				if(o.getStatus().equals("Ordered"))
 				{
 					for (int i = 0; i<ret.size(); i++)
 					{
-						if (ret.get(i).getTimestamp() <= o.getTimestamp())
+						if (ret.get(i).getTimestamp() >= o.getTimestamp())
 						{
 							ret.add(i,o);
+							added = true;
 							break;
 						}
-						else if (i == ret.size() - 1)
-						{
-							ret.add(o);
-						}
-					}	
+					}
+					if(!added)
+						ret.add(o);
 				}
 			}
 		}

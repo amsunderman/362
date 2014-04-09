@@ -1,7 +1,10 @@
 package view;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
+import model.Order;
 import controller.RestaurantController;
 
 public class CommandLineInterface {
@@ -46,22 +49,23 @@ public class CommandLineInterface {
 				//variables for upcoming switch statement
 				int code = Integer.parseInt(operationNumber);
 				boolean b;
-				String serverID, passcode = null;
-				int tableNumber = -1;
+				String serverID, passcode, drink, appetizer, meal, side, special, field, newData, ret = null;
+				int tableNumber, orderID = -1;
+				ArrayList<Order> orders = new ArrayList<Order>();
 				
 				switch(code) {
 				//login
 				case 1:
 					if (authenticated) {
-						System.out.println("You are already logged in");
+						JOptionPane.showMessageDialog(null, "You are already logged in");
 					} else {
 						while (!authenticated) {
 							passcode =JOptionPane.showInputDialog("Enter Management Passcode");
 							if(controller.authenticate(passcode)) {
 								authenticated = true;
-								System.out.println("Login successful");
+								JOptionPane.showMessageDialog(null, "Login successful");
 							} else {
-								System.out.println("Incorrect Passcode");
+								JOptionPane.showMessageDialog(null, "Incorrect Passcode");
 							}
 						}
 					}
@@ -71,28 +75,28 @@ public class CommandLineInterface {
 				case 2:
 					int newTableCount=Integer.parseInt(JOptionPane.showInputDialog("Enter new table count"));
 					b= controller.editTableCount(newTableCount);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//add server
 				case 3:
 					serverID =JOptionPane.showInputDialog("Enter serverID");
 					b= controller.addServer(serverID);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//delete server
 				case 4:
 					serverID = JOptionPane.showInputDialog("Enter serverID");
 					b= controller.deleteServer(serverID);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//check table information
 				case 5:
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Table Number"));
 					String tableInfo = controller.getTableInfo(tableNumber);
-					System.out.println(tableInfo);
+					JOptionPane.showMessageDialog(null, tableInfo);
 					break;
 					
 				//change table's assigned server
@@ -100,7 +104,7 @@ public class CommandLineInterface {
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Table Number"));
 					String newServerID = JOptionPane.showInputDialog("Enter serverID");
 					b= controller.changeTableServer(tableNumber, newServerID);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//set table to "in use"
@@ -108,21 +112,21 @@ public class CommandLineInterface {
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Table Number"));
 					serverID = JOptionPane.showInputDialog("Enter serverID");
 					b= controller.setTableToInUse(tableNumber, serverID);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//set table to "ready"
 				case 8:
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Table Number"));
 					b= controller.setTableToReady(tableNumber);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//view a list of tables a server is assigned to
 				case 9:
 					serverID = JOptionPane.showInputDialog("Enter serverID");
 					String serverTables = controller.getServerTables(serverID);
-					System.out.println(serverTables);
+					JOptionPane.showMessageDialog(null, serverTables);
 					break;
 					
 				//submit server feedback
@@ -133,7 +137,7 @@ public class CommandLineInterface {
 				    " 1. Good\n"+
 				    " 2. Bad");
 					b= controller.submitFeedback(serverID, feedback, Integer.parseInt(goodFeedback) == 1);
-					System.out.println("Operation success boolean is "+b);
+					JOptionPane.showMessageDialog(null, "Operation success boolean is "+b);
 					break;
 					
 				//check server feedback
@@ -141,9 +145,9 @@ public class CommandLineInterface {
 					serverID = JOptionPane.showInputDialog("Enter serverID");
 					String serverFeedback = controller.getServerFeedback(serverID);
 					if (serverFeedback == null) {
-						System.out.println("Server Feedback null. Please ensure you are logged in.");
+						JOptionPane.showMessageDialog(null, "Server Feedback null. Please ensure you are logged in.");
 					}
-					System.out.println(serverFeedback);
+					JOptionPane.showMessageDialog(null, serverFeedback);
 					break;
 					
 				//view a list of server id's and the # of tables they are servicing
@@ -153,23 +157,67 @@ public class CommandLineInterface {
 					
 				//create an order
 				case 13:
-					
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					drink = JOptionPane.showInputDialog("Enter drink");
+					appetizer = JOptionPane.showInputDialog("Enter appetizer");
+					meal = JOptionPane.showInputDialog("Enter meal");
+					side = JOptionPane.showInputDialog("Enter side");
+					special = JOptionPane.showInputDialog("Enter special requests");
+					b = controller.createOrder(tableNumber, drink, appetizer, meal, side, special);
+					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
 					break;
 					
 				//modify an order
 				case 14:
-					
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					orderID = Integer.parseInt(JOptionPane.showInputDialog("Enter OrderID"));
+					operationNumber=JOptionPane.showInputDialog(
+						    "Enter field number to modify \n"+
+						    " 1. Drink\n"+
+						    " 2. Appetizer\n"+
+						    " 3. Meal\n"+
+						    " 4. Side\n"+
+						    " 5. Special Requests\n"+
+						    " 6. Status\n");
+					code = Integer.parseInt(operationNumber);
+					if(code == 1)
+						field = "drink";
+					else if(code == 2)
+						field = "appetizer";
+					else if(code == 3)
+						field = "meal";
+					else if(code == 4)
+						field = "side";
+					else if(code == 5)
+						field = "special";
+					else if(code == 6)
+						field = "status";
+					else
+						field = "";
+					newData = JOptionPane.showInputDialog("Enter new data");
+					b = controller.modifyOrder(tableNumber, orderID, field, newData);
+					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
 					break;
 					
 				//delete an order
 				case 15:
-					
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					orderID = Integer.parseInt(JOptionPane.showInputDialog("Enter OrderID"));
+					b = controller.deleteOrder(tableNumber, orderID);
+					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
 					break;
 					
 				//obtain a list of ordered sorted by creation
 				case 16:
-					
+					ret = "";
+					orders = controller.obtainOrderListByCreation();
+					for(Order o : orders)
+					{
+						ret += o.toString();
+					}
+					JOptionPane.showMessageDialog(null, ret);
 					break;
+					
 					
 				//split a table's checks
 				case 17:

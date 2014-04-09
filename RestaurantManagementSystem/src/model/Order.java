@@ -67,4 +67,14 @@ public class Order implements OrderInterface {
 	{
 		return status;
 	}
+	
+	public String toString()
+	{
+		String ret = "";
+		
+		ret += orderID + ":\ndrink: " + drink + "\n" + 
+				"appetizer: " + appetizer + "\n" + "meal: " + meal + "\n" +
+				"side: " + side + "\n" + "special: " + special + "\n";
+		return ret;
+	}
 }

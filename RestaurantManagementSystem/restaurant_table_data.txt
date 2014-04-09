@@ -1,10 +1,4 @@
-Table 1 info: not in use. no one assigned.
-_
-Table 2 info: not in use. no one assigned.
-_
-Table 3 info: not in use. no one assigned.
-_
-Table 4 info: not in use. no one assigned.
-_
-Table 5 info: not in use. no one assigned.
-_
+Table 1 info: in use. assigned to Adam.
+Adam
+Table 2 info: in use. assigned to Kyle.
+Kyle
