@@ -7,6 +7,7 @@ public interface OrderInterface {
     void modifySide(String newValue);
     void modifySpecial(String newValue);
     void modifyStatus(String newValue);
+    void modifyTimeStamp(long timestamp);
     int getID();
     long getTimestamp();
     String getStatus();

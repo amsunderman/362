@@ -18,6 +18,7 @@ public class Restaurant implements RestaurantInterface {
 		restaurantStatistics = new RestaurantStatistics();
 		//passes restaurantStatistics for initial populate from file
 		storageSupport = new StorageSupport(restaurantStatistics);
+		orderID = restaurantStatistics.getOrderID();
 	}
 	
 	@Override
@@ -160,7 +161,7 @@ public class Restaurant implements RestaurantInterface {
 		Table t = storageSupport.getTable(tableNumber);
 		if (t == null)
 			return false;
-		orderID++;
+		restaurantStatistics.updateOrderID(++orderID);
 		Order o = new Order(orderID, drink, appetizer, meal, side, special);
 		return t.putOrder(o);
 	}

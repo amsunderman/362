@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -75,12 +76,43 @@ public class Storage {
 		try {
 			scanner = new Scanner(file);
 			Table table;
-			String serverID, tableInfo;
+			String serverID, tableInfo, line, drink, app, meal, side, special, status;
+			int orderID;
 			int tableCount = 1;
+			long timestamp;
 			while (scanner.hasNext()) {
 				tableInfo = scanner.nextLine();
 				serverID = scanner.nextLine();
 				table = new Table(tableCount, servers.get(serverID));
+				line = scanner.nextLine();
+				while(!line.equals("</ORDERS>"))
+				{
+					if(!line.equals("<ORDERS>"))
+					{
+						line = line.substring(0, line.length() - 1);
+						orderID = Integer.parseInt(line);
+						line = scanner.nextLine();
+						drink = line.substring(7);
+						line = scanner.nextLine();
+						app = line.substring(11);
+						line = scanner.nextLine();
+						meal = line.substring(6);
+						line = scanner.nextLine();
+						side = line.substring(6);
+						line = scanner.nextLine();
+						special = line.substring(9);
+						line = scanner.nextLine();
+						status = line.substring(8);
+						line = scanner.nextLine();
+						line = line.substring(11);
+						timestamp = Long.parseLong(line);
+						Order o = new Order(orderID, drink, app, meal, side, special);
+						o.modifyStatus(status);
+						o.modifyTimeStamp(timestamp);
+						table.putOrder(o);
+					}
+					line = scanner.nextLine();
+				}
 				if(tableInfo.contains(": in use."))
 				{
 					table.setToInUse(servers.get(serverID));
@@ -100,6 +132,7 @@ public class Storage {
 			scanner = new Scanner(file);
 			while (scanner.hasNext()) {
 				restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
+				restaurantStatistics.updateOrderID(Integer.parseInt(scanner.next()));
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in statistics data file read");
@@ -155,6 +188,18 @@ public class Storage {
 			} else {
 				writer.println(table.getServer().getServerID());
 			}
+			if (table.getAllOrders() == null) {
+				writer.println("_");
+			} else {
+				writer.println("<ORDERS>");
+				HashMap<Integer, Order> orders = table.getAllOrders();
+				for(Entry<Integer, Order> entry : orders.entrySet())
+				{
+					Order o = entry.getValue();
+					writer.print(o.toString());
+				}
+				writer.print("</ORDERS>\n");
+			}
 		}
 		writer.close();
 		
@@ -165,6 +210,7 @@ public class Storage {
 			System.out.println("writer create error for statistics file");
 		}
 		writer.println(restaurantStatistics.getTableCount());
+		writer.println(restaurantStatistics.getOrderID());
 		writer.close();
 	}
 

@@ -74,7 +74,13 @@ public class Order implements OrderInterface {
 		
 		ret += orderID + ":\ndrink: " + drink + "\n" + 
 				"appetizer: " + appetizer + "\n" + "meal: " + meal + "\n" +
-				"side: " + side + "\n" + "special: " + special + "\n";
+				"side: " + side + "\n" + "special: " + special + "\n" + 
+				"status: " + status + "\n" + "timestamp: " + timestamp + "\n";
 		return ret;
+	}
+
+	@Override
+	public void modifyTimeStamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 }
