@@ -4,6 +4,7 @@ import interfaces.TableInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Table implements TableInterface {
@@ -121,6 +122,16 @@ public class Table implements TableInterface {
 	@Override
 	public boolean addCheck(String orderString)
 	{
+		Scanner scan = new Scanner(orderString);
+		while(scan.hasNext())
+		{
+			if(!orders.containsKey((Integer) scan.nextInt()))
+			{
+				scan.close();
+				return false;
+			}
+		}
+		scan.close();
 		Check c = new Check(orderString);
 		return checks.add(c);
 	}
