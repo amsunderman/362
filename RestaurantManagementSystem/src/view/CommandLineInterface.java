@@ -32,7 +32,7 @@ public class CommandLineInterface {
 				    " 14. Modify an Order\n"+
 				    " 15. Delete an Order\n"+
 				    " 16. View a List of Orders\n"+
-				    " 17. Split a Table's Checks\n"+
+				    " 17. Generate Table's Checks\n"+
 				    " 18. Obtain a List of Checks for a Table\n"+
 				    " 19. Obtain a List of Orders for a Table\n"+
 				    " 20. View a List of Tables with Server Immediate Action\n"+
@@ -50,8 +50,9 @@ public class CommandLineInterface {
 				int code = Integer.parseInt(operationNumber);
 				boolean b;
 				String serverID, passcode, drink, appetizer, meal, side, special, field, newData, ret = null;
-				int tableNumber, orderID = -1;
+				int tableNumber, orderID, numChecks = -1;
 				ArrayList<Order> orders = new ArrayList<Order>();
+				ArrayList<String> orderLists;
 				
 				switch(code) {
 				//login
@@ -221,7 +222,15 @@ public class CommandLineInterface {
 					
 				//split a table's checks
 				case 17:
-					
+					orderLists = new ArrayList<String>();
+					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
+					numChecks = Integer.parseInt(JOptionPane.showInputDialog("Enter number of checks"));
+					for(int i = 0; i < numChecks; i++)
+					{
+						orderLists.add(JOptionPane.showInputDialog("Enter orders for check " + (i+1)));
+					}
+					b = controller.generateChecks(tableNumber, orderLists);
+					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
 					break;
 					
 				//obtain a list of checks for a table
