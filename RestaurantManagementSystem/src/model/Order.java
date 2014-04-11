@@ -24,34 +24,28 @@ public class Order implements OrderInterface {
 		status = "Ordered";
 	}
 	
-	public void modifyDrink(String newvalue)
+	@Override
+	public boolean modifyOrder(String field, String newvalue)
 	{
-		drink = newvalue;
-	}
-	
-	public void modifyAppetizer(String newvalue)
-	{
-		appetizer = newvalue;
-	}
-	
-	public void modifyMeal(String newvalue)
-	{
-		meal = newvalue;
-	}
-	
-	public void modifySide(String newvalue)
-	{
-		side = newvalue;
-	}
-	
-	public void modifySpecial(String newvalue)
-	{
-		special = newvalue;
-	}
-	
-	public void modifyStatus(String newvalue)
-	{
-		status = newvalue;
+		if (field.equals("drink"))
+			drink = newvalue;
+		else if (field.equals("appetizer"))
+			appetizer = newvalue;
+		else if (field.equals("meal"))
+			meal = newvalue;
+		else if (field.equals("side"))
+			side = newvalue;
+		else if (field.equals("special"))
+			special = newvalue;
+		else if (field.equals("status"))
+			if(newvalue.equals("Ordered") || newvalue.equals("Appetizers Complete") || newvalue.equals("Order Complete"))
+				status = newvalue;
+			else
+				return false;
+		else
+			return false;
+		
+		return true;
 	}
 	
 	public int getID()

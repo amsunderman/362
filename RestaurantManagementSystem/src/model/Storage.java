@@ -107,7 +107,7 @@ public class Storage {
 						line = line.substring(11);
 						timestamp = Long.parseLong(line);
 						Order o = new Order(orderID, drink, app, meal, side, special);
-						o.modifyStatus(status);
+						o.modifyOrder("status", status);
 						o.modifyTimeStamp(timestamp);
 						table.putOrder(o);
 					}

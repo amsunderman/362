@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public class Restaurant implements RestaurantInterface {
 	
@@ -188,20 +187,7 @@ public class Restaurant implements RestaurantInterface {
 		Order o = t.getOrder(orderID);
 		if (o == null)
 			return false;
-		if (field.equals("drink"))
-			o.modifyDrink(newvalue);
-		else if (field.equals("appetizer"))
-			o.modifyAppetizer(newvalue);
-		else if (field.equals("meal"))
-			o.modifyMeal(newvalue);
-		else if (field.equals("side"))
-			o.modifySide(newvalue);
-		else if (field.equals("special"))
-			o.modifySpecial(newvalue);
-		else if (field.equals("status"))
-			o.modifyStatus(newvalue);
-		else
-			return false;
+		o.modifyOrder(field, newvalue);
 		return t.putOrder(o);
 	}
 	
