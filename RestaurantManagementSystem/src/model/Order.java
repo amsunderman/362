@@ -38,10 +38,12 @@ public class Order implements OrderInterface {
 		else if (field.equals("special"))
 			special = newvalue;
 		else if (field.equals("status"))
+		{
 			if(newvalue.equals("Ordered") || newvalue.equals("Appetizers Complete") || newvalue.equals("Order Complete"))
 				status = newvalue;
 			else
 				return false;
+		}
 		else
 			return false;
 		
