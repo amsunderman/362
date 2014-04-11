@@ -198,7 +198,7 @@ public class Storage {
 					Order o = entry.getValue();
 					writer.print(o.toString());
 				}
-				writer.print("</ORDERS>\n");
+				writer.println("</ORDERS>");
 			}
 		}
 		writer.close();

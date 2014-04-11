@@ -187,7 +187,8 @@ public class Restaurant implements RestaurantInterface {
 		Order o = t.getOrder(orderID);
 		if (o == null)
 			return false;
-		o.modifyOrder(field, newvalue);
+		if(o.modifyOrder(field, newvalue) == false)
+			return false;
 		return t.putOrder(o);
 	}
 	

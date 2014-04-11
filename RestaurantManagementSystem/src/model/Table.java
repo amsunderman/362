@@ -124,7 +124,16 @@ public class Table implements TableInterface {
 		Scanner scan = new Scanner(orderString);
 		while(scan.hasNext())
 		{
-			if(!orders.containsKey((Integer) scan.nextInt()))
+			Integer nextOrder = scan.nextInt();
+			for(Check cur_check : checks)
+			{
+				if(cur_check.orders.contains(nextOrder))
+				{
+					scan.close();
+					return false;
+				}
+			}
+			if(!orders.containsKey(nextOrder))
 			{
 				scan.close();
 				return false;

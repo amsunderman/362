@@ -1,24 +1,24 @@
 Table 1 info: in use. assigned to Adam.
 Adam
 <ORDERS>
-1:
+2:
 drink: dr pepper
 appetizer: wings
 meal: steak
 side: corn
 special: medium rare
 status: Ordered
-timestamp: 1397010784154
+timestamp: 1397226979673
+3:
+drink: water
+appetizer: none
+meal: sandwich
+side: none
+special: none
+status: Ordered
+timestamp: 1397227091368
 </ORDERS>
 Table 2 info: in use. assigned to Kyle.
 Kyle
 <ORDERS>
-2:
-drink: mountain dew
-appetizer: moz sticks
-meal: chicken
-side: brocolli
-special: steamed
-status: Ordered
-timestamp: 1397010851114
 </ORDERS>
