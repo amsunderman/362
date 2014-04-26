@@ -49,8 +49,8 @@ public class CommandLineInterface {
 				//variables for upcoming switch statement
 				int code = Integer.parseInt(operationNumber);
 				boolean b;
-				String serverID, passcode, drink, appetizer, meal, side, special, field, newData, ret = null;
-				int tableNumber, orderID, numChecks = -1;
+				String serverID, passcode, special, field, newData = null, ret = null;
+				int drink, appetizer, meal, side, tableNumber, orderID, numChecks = -1;
 				ArrayList<Order> orders = new ArrayList<Order>();
 				ArrayList<String> orderLists;
 				
@@ -160,10 +160,26 @@ public class CommandLineInterface {
 				//create an order
 				case 13:
 					tableNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter table number"));
-					drink = JOptionPane.showInputDialog("Enter drink");
-					appetizer = JOptionPane.showInputDialog("Enter appetizer");
-					meal = JOptionPane.showInputDialog("Enter meal");
-					side = JOptionPane.showInputDialog("Enter side");
+					drink = Integer.parseInt(JOptionPane.showInputDialog("Enter drink \n"+
+							" 1. Drink A\n"+
+							" 2. Drink B\n"+
+							" 3. Drink C\n"
+							));
+					appetizer = Integer.parseInt(JOptionPane.showInputDialog("Enter appetizer \n"+
+							" 1. Appetizer A\n"+
+							" 2. Appetizer B\n"+
+							" 3. Appetizer C\n"
+							));
+					meal = Integer.parseInt(JOptionPane.showInputDialog("Enter meal \n"+
+							" 1. Meal A\n"+
+							" 2. Meal B\n"+
+							" 3. Meal C\n"							
+							));
+					side = Integer.parseInt(JOptionPane.showInputDialog("Enter side \n"+
+							" 1. Side A\n"+
+							" 2. Side B\n"+
+							" 3. Side C\n"
+							));
 					special = JOptionPane.showInputDialog("Enter special requests");
 					b = controller.createOrder(tableNumber, drink, appetizer, meal, side, special);
 					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
@@ -183,20 +199,57 @@ public class CommandLineInterface {
 						    " 6. Status\n");
 					code = Integer.parseInt(operationNumber);
 					if(code == 1)
+					{
 						field = "drink";
+						newData = (JOptionPane.showInputDialog("Enter drink \n"+
+							" 1. Drink A\n"+
+							" 2. Drink B\n"+
+							" 3. Drink C\n"
+							));
+					}
 					else if(code == 2)
+					{
 						field = "appetizer";
+						newData = (JOptionPane.showInputDialog("Enter appetizer \n"+
+								" 1. Appetizer A\n"+
+								" 2. Appetizer B\n"+
+								" 3. Appetizer C\n"
+								));
+					}
 					else if(code == 3)
+					{
 						field = "meal";
+						newData = (JOptionPane.showInputDialog("Enter meal \n"+
+								" 1. Meal A\n"+
+								" 2. Meal B\n"+
+								" 3. Meal C\n"							
+								));
+					}
 					else if(code == 4)
+					{
 						field = "side";
+						newData = (JOptionPane.showInputDialog("Enter side \n"+
+								" 1. Side A\n"+
+								" 2. Side B\n"+
+								" 3. Side C\n"
+								));
+					}
 					else if(code == 5)
+					{
 						field = "special";
+						newData = JOptionPane.showInputDialog("Enter special requests");
+					}
 					else if(code == 6)
+					{
 						field = "status";
+						newData = (JOptionPane.showInputDialog(
+								" 1. Ordered\n"+
+								" 2. Appetizer complete\n"+
+								" 3. Order complete\n"
+								));
+					}
 					else
 						field = "";
-					newData = JOptionPane.showInputDialog("Enter new data");
 					b = controller.modifyOrder(tableNumber, orderID, field, newData);
 					JOptionPane.showMessageDialog(null, "Operation Success boolean is " + b);
 					break;
@@ -280,7 +333,51 @@ public class CommandLineInterface {
 					
 				//view popularity of menu items
 				case 26:
-					
+					int type;
+					String mealType=JOptionPane.showInputDialog(
+						    "Enter field number to modify \n"+
+						    " 1. Drink\n"+
+						    " 2. Appetizer\n"+
+						    " 3. Meal\n"+
+						    " 4. Side\n"
+						    );
+					type = Integer.parseInt(mealType);
+					if (type==1)
+					{
+						drink = Integer.parseInt(JOptionPane.showInputDialog("Enter drink \n"+
+								" 1. Drink A\n"+
+								" 2. Drink B\n"+
+								" 3. Drink C\n"
+								));
+						controller.checkItemPopularity(type, drink);
+					}
+					else if (type==2)
+					{
+						appetizer = Integer.parseInt(JOptionPane.showInputDialog("Enter appetizer \n"+
+								" 1. Appetizer A\n"+
+								" 2. Appetizer B\n"+
+								" 3. Appetizer C\n"
+								));
+						controller.checkItemPopularity(type, appetizer);
+					}
+					else if (type==3)
+					{
+						meal = Integer.parseInt(JOptionPane.showInputDialog("Enter meal \n"+
+								" 1. Meal A\n"+
+								" 2. Meal B\n"+
+								" 3. Meal C\n"							
+								));
+						controller.checkItemPopularity(type, meal);
+					}
+					else if (type==4)
+					{
+						side = Integer.parseInt(JOptionPane.showInputDialog("Enter side \n"+
+								" 1. Side A\n"+
+								" 2. Side B\n"+
+								" 3. Side C\n"
+								));
+						controller.checkItemPopularity(type, side);
+					}
 					break;
 					
 				//view a list of servers with positive feedback

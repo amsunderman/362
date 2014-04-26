@@ -14,7 +14,7 @@ public interface RestaurantControllerInterface {
 	String getServerTables(String serverID);
 	boolean submitFeedback(String serverID, String feedback, boolean good);
 	String getServerFeedback(String serverID);
-	boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special);
+	boolean createOrder(int tableNumber, int drink, int appetizer, int meal, int side, String special);
 	boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue);
 	boolean deleteOrder(int tableNumber, int orderID);
 	ArrayList<Order> obtainOrderListByCreation();
@@ -23,4 +23,5 @@ public interface RestaurantControllerInterface {
 	String getServersAndNumberOfTables();
 	String getTablesChecks(int tableNumber);
 	String getTablesOrders(int tableNumber);
+	int checkItemPopularity(int type, int itemIndex);
 }

@@ -157,11 +157,15 @@ public class Restaurant implements RestaurantInterface {
 	}
 	
 	@Override
-	public boolean createOrder(int tableNumber, String drink, String appetizer, String meal, String side, String special) {
+	public boolean createOrder(int tableNumber, int drink, int appetizer, int meal, int side, String special) {
 		Table t = storageSupport.getTable(tableNumber);
 		if (t == null)
 			return false;
 		restaurantStatistics.updateOrderID(++orderID);
+		restaurantStatistics.updateDrinkCount(drink, true);
+		restaurantStatistics.updateMealCount(meal, true);
+		restaurantStatistics.updateAppetizerCount(appetizer, true);
+		restaurantStatistics.updateSideCount(side, true);
 		Order o = new Order(orderID, drink, appetizer, meal, side, special);
 		return t.putOrder(o);
 	}
@@ -187,7 +191,7 @@ public class Restaurant implements RestaurantInterface {
 		Order o = t.getOrder(orderID);
 		if (o == null)
 			return false;
-		if(o.modifyOrder(field, newvalue) == false)
+		if(o.modifyOrder(field, newvalue, restaurantStatistics) == false)
 			return false;
 		return t.putOrder(o);
 	}
@@ -281,5 +285,25 @@ public class Restaurant implements RestaurantInterface {
 				return false;
 		}
 		return true;
+	}
+
+	public int checkItemPopularity(int type, int itemIndex) {
+		if (type == 1)
+		{
+			return restaurantStatistics.getDrinkCount(itemIndex);
+		}
+		else if (type == 2)
+		{
+			return restaurantStatistics.getMealCount(itemIndex);
+		}
+		else if (type == 3)
+		{
+			return restaurantStatistics.getAppetizerCount(itemIndex);
+		}
+		else if (type == 4)
+		{
+			return restaurantStatistics.getSideCount(itemIndex);
+		}
+		return -1;
 	}
 }
