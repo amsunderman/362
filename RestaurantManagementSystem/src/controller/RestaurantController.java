@@ -6,39 +6,83 @@ import interfaces.RestaurantControllerInterface;
 import model.Order;
 import model.Restaurant;
 
+/**
+ * Controller class that mediates interactions between view and Restaurant Model. Handles an instance of Restaurant.
+ * implements Restaurant Controller Interface.
+ * @author Team 3
+ *
+ */
 public class RestaurantController implements RestaurantControllerInterface{
-	
+
+	/**
+	 * Instance of restaurant
+	 */
 	private Restaurant restaurant = null;
 	
+	/**
+	 * Default constructor for RestaurantController. Initializes instance of Restaurant model
+	 */
 	public RestaurantController() {
 		restaurant = new Restaurant();
 	}
 
+	/**
+	 * edits restaurant table count according to provided argument
+	 * @param newTableCountvnumber of tables to be contained in Restaurant
+	 * @return true for success false for failure
+	 */
 	@Override
 	public boolean editTableCount(int newTableCount) {
 		return restaurant.editTableCount(newTableCount);
 	}
 
+	/**
+	 * Adds server to Restaurant model
+	 * @param serverID server's unique identifier to be stored in memory
+	 * @return true for success false for failure
+	 */
 	@Override
 	public boolean addServer(String serverID) {
 		return restaurant.addServer(serverID);
 	}
 
+	/**
+	 * Removes server from model by the server's unique identifier
+	 * @param serverID server to remove from model
+	 * @return true for success false for failure
+	 */
 	@Override
 	public boolean deleteServer(String serverID) {
 		return restaurant.deleteServer(serverID);
 	}
 
+	/**
+	 * Retrieves table information in formatted string
+	 * @param tableNumber table to get information from
+	 * @return table "in use" status and server assigned (null if operation fails)
+	 */
 	@Override
 	public String getTableInfo(int tableNumber) {
 		return restaurant.getTableInfo(tableNumber);
 	}
 
+	/**
+	 * Change server assigned to a specific table
+	 * @param tableNumber unique identifier for table to change server of
+	 * @param newServerID unique identifier for server to assign to table
+	 * @return true for success false for failure
+	 */
 	@Override
 	public boolean changeTableServer(int tableNumber, String newServerID) {
 		return restaurant.changeTableServer(tableNumber, newServerID);
 	}
 
+	/**
+	 * sets table to "in use" status representing a table with customers seated
+	 * @param tableNumber unique identifier for table that is being set in use
+	 * @param serverID unique identifier for server who will work table
+	 * @return true for success false for failure
+	 */
 	@Override
 	public boolean setTableToInUse(int tableNumber, String serverID) {
 		return restaurant.setTableToInUse(tableNumber, serverID);
