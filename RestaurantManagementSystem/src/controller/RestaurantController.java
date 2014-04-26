@@ -120,8 +120,8 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 
 	@Override
-	public boolean createOrder(int tableNumber, String drink,
-			String appetizer, String meal, String side, String special) {
+	public boolean createOrder(int tableNumber, int drink,
+			int appetizer, int meal, int side, String special) {
 		return restaurant.createOrder(tableNumber, drink, appetizer, meal, side, special);
 	}
 
@@ -159,6 +159,11 @@ public class RestaurantController implements RestaurantControllerInterface{
 	@Override
 	public boolean generateChecks(int tableNumber, ArrayList<String> orders) {
 		return restaurant.generateChecks(tableNumber, orders);
+	}
+
+	@Override
+	public int checkItemPopularity(int type, int itemIndex) {
+		return restaurant.checkItemPopularity(type, itemIndex);
 	}
 
 }

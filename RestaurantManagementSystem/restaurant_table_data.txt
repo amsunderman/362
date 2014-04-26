@@ -1,19 +1,19 @@
 Table 1 info: in use. assigned to Adam.
 Adam
 <ORDERS>
-2:
-drink: dr pepper
-appetizer: wings
-meal: steak
-side: corn
-special: medium rare
+1:
+drink: 1
+appetizer: 2
+meal: 3
+side: 1
+special: Extra BBQ Sauce
 status: Ordered
 timestamp: 1397226979673
-3:
-drink: water
-appetizer: none
-meal: sandwich
-side: none
+2:
+drink: 2
+appetizer: 3
+meal: 1
+side: 2
 special: none
 status: Ordered
 timestamp: 1397227091368

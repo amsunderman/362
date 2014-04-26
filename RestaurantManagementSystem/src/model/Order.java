@@ -4,15 +4,15 @@ import interfaces.OrderInterface;
 
 public class Order implements OrderInterface {
 	private int orderID;
-	private String drink;
-	private String appetizer;
-	private String meal;
-	private String side;
+	private int drink;
+	private int appetizer;
+	private int meal;
+	private int side;
 	private String special;
 	private long timestamp;
 	private String status;
 	
-	public Order(int orderID, String drink, String appetizer, String meal, String side, String special)
+	public Order(int orderID, int drink, int appetizer, int meal, int side, String special)
 	{
 		this.orderID = orderID;
 		this.drink = drink;
@@ -25,16 +25,36 @@ public class Order implements OrderInterface {
 	}
 	
 	@Override
-	public boolean modifyOrder(String field, String newvalue)
+	public boolean modifyOrder(String field, String newvalue, RestaurantStatistics stats)
 	{
 		if (field.equals("drink"))
-			drink = newvalue;
+		{
+			int drinkIndex = Integer.parseInt(newvalue);
+			stats.updateDrinkCount(drinkIndex, true);
+			stats.updateDrinkCount(drink, false);
+			drink = drinkIndex;
+		}
 		else if (field.equals("appetizer"))
-			appetizer = newvalue;
+		{
+			int appetizerIndex = Integer.parseInt(newvalue);
+			stats.updateAppetizerCount(appetizerIndex, true);
+			stats.updateAppetizerCount(appetizer, false);
+			appetizer = appetizerIndex;
+		}
 		else if (field.equals("meal"))
-			meal = newvalue;
+		{
+			int mealIndex = Integer.parseInt(newvalue);
+			stats.updateMealCount(mealIndex, true);
+			stats.updateMealCount(meal, false);
+			meal = mealIndex;
+		}
 		else if (field.equals("side"))
-			side = newvalue;
+		{
+			int sideIndex = Integer.parseInt(newvalue);
+			stats.updateSideCount(sideIndex, true);
+			stats.updateSideCount(side, false);
+			side = sideIndex;
+		}
 		else if (field.equals("special"))
 			special = newvalue;
 		else if (field.equals("status"))

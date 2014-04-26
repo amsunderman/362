@@ -76,7 +76,8 @@ public class Storage {
 		try {
 			scanner = new Scanner(file);
 			Table table;
-			String serverID, tableInfo, line, drink, app, meal, side, special, status;
+			String serverID, tableInfo, line, special, status;
+			int drink, app, meal, side;
 			int orderID;
 			int tableCount = 1;
 			long timestamp;
@@ -92,13 +93,13 @@ public class Storage {
 						line = line.substring(0, line.length() - 1);
 						orderID = Integer.parseInt(line);
 						line = scanner.nextLine();
-						drink = line.substring(7);
+						drink = Integer.parseInt(line.substring(7));
 						line = scanner.nextLine();
-						app = line.substring(11);
+						app = Integer.parseInt(line.substring(11));
 						line = scanner.nextLine();
-						meal = line.substring(6);
+						meal = Integer.parseInt(line.substring(6));
 						line = scanner.nextLine();
-						side = line.substring(6);
+						side = Integer.parseInt(line.substring(6));
 						line = scanner.nextLine();
 						special = line.substring(9);
 						line = scanner.nextLine();
@@ -107,7 +108,7 @@ public class Storage {
 						line = line.substring(11);
 						timestamp = Long.parseLong(line);
 						Order o = new Order(orderID, drink, app, meal, side, special);
-						o.modifyOrder("status", status);
+						o.modifyOrder("status", status, null);
 						o.modifyTimeStamp(timestamp);
 						table.putOrder(o);
 					}
