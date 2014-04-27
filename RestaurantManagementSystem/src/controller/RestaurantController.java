@@ -88,37 +88,71 @@ public class RestaurantController implements RestaurantControllerInterface{
 		return restaurant.setTableToInUse(tableNumber, serverID);
 	}
 
+	/**
+	 * sets table to "ready" status representing a table is ready to seat next customer
+	 * @param tableNumber unique identifier for table that is to be set to ready
+	 * @return true for operation success, false for failure
+	 */
 	@Override
 	public boolean setTableToReady(int tableNumber) {
 		return restaurant.setTableToReady(tableNumber);
 	}
 
+	/**
+	 * gets a formatted string listing the tables a server is assigned to
+	 * @param serverID unique identifier for server to retreive list of tables for
+	 * @return list of tables server is assigned to (null if operation fails)
+	 */
 	@Override
 	public String getServerTables(String serverID) {
 		return restaurant.getServerTables(serverID);
 	}
 
+	/**
+	 * submits feedback for a specified server
+	 * @param serverID unique identifier for server to submit feedback for
+	 * @param feedback string containing feedback for server
+	 * @param good true marks positive feedback, false marks criticism
+	 * @return true for operation success, false for failure
+	 */
 	@Override
 	public boolean submitFeedback(String serverID, String feedback, boolean good) {
 		return restaurant.submitFeedback(serverID, feedback, good);
 	}
 
+	/**
+	 * gets a formatted string containing server feedback
+	 * @param serverID unique identifier for server to get feedback for
+	 * @return formatted string containing server feedback (null if operation fails)
+	 */
 	@Override
 	public String getServerFeedback(String serverID) {
 		return restaurant.getServerFeedback(serverID);
 	}
 	
-
+	/**
+	 * logon authentication for Restaurant Manager
+	 * @param passcode password for manager account
+	 * @return true if manager successfully logs in, false if operation fails
+	 */
 	@Override
 	public boolean authenticate(String passcode) {
 		return restaurant.authenticate(passcode);
 	}
 	
-	//will be called by view on exit
+	/**
+	 * stores all restaurant data into text files as persistent data. Must be called by View on exit
+	 * @param none
+	 * @return void
+	 */
 	public void dumpToFile() {
 		restaurant.dumpToFile();
 	}
 
+	/**
+	 * creates order for a customer at a specified table
+	 * @param tableNumber unique identifier for 
+	 */
 	@Override
 	public boolean createOrder(int tableNumber, int drink,
 			int appetizer, int meal, int side, String special) {
