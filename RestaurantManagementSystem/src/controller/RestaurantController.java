@@ -131,6 +131,109 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 	
 	/**
+	 * gets formatted string containing all servers and the number of tables they are working
+	 * @param none
+	 * @return formatted string containing all servers and table count (null if operation fails)
+	 */
+	@Override
+	public String getServersAndNumberOfTables() {
+		return restaurant.getServersAndNumberOfTables();
+	}
+
+	/**
+	 * creates order for a customer at a specified table
+	 * @param tableNumber unique identifier for table that contains customer who is ordering
+	 * @param drink integer representing the drink ordered from menu
+	 * @param appetizer integer representing the appetizer ordered from menu
+	 * @param meal integer representing the meal ordered from the menu
+	 * @param side integer representing the side ordered from the menu
+	 * @param special string representing any special request from the customer
+	 * @return true if order is successfully created, false if operation fails
+	 */
+	@Override
+	public boolean createOrder(int tableNumber, int drink,
+			int appetizer, int meal, int side, String special) {
+		return restaurant.createOrder(tableNumber, drink, appetizer, meal, side, special);
+	}
+
+	/**
+	 * modifies an order's specified field with a provided new value
+	 * @param tableNumber unique identifier for the table that contains the order to be modified
+	 * @param orderID unique identifier for order to modify
+	 * @param field string representing which field needs modified
+	 * @param newvalue string that contains new data to write into specified field
+	 * @return true if operation success, false if operation fails
+	 */
+	@Override
+	public boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue) {
+		return restaurant.modifyOrder(tableNumber, orderID, field, newvalue);
+	}
+	
+	/**
+	 * deletes a specified order, removing it from restaurant model entirely
+	 * @param tableNumber unique identifier for table that contains order to be removed
+	 * @param orderID unique identifier for order to remove
+	 * @return true for operation success, false for failure
+	 */
+	@Override
+	public boolean deleteOrder(int tableNumber, int orderID)
+	{
+		return restaurant.deleteOrder(tableNumber, orderID);
+	}
+
+	/**
+	 * obtains a list of orders (sorted by earliest creation timestamp)
+	 * @param none
+	 * @return array list of orders sorted by creation date
+	 */
+	@Override
+	public ArrayList<Order> obtainOrderListByCreation() {
+		return restaurant.obtainOrderListByCreation();
+	}
+
+	/**
+	 * gets formatted string containing tables checks
+	 * @param tableNumber unique identifier for table to retrieve check information from
+	 * @return formatted string containing all check information for specified table (null if operation fails)
+	 */
+	@Override
+	public String getTablesChecks(int tableNumber) {
+		return restaurant.getTablesChecks(tableNumber);
+	}
+
+	/**
+	 * gets formatted string containing all tables orders
+	 * @param tableNumber unique identifier for table to retrieve order information from
+	 * @return formatted string containing all order information for specified table (null if operation fails)
+	 */
+	@Override
+	public String getTablesOrders(int tableNumber) {
+		return restaurant.getTablesOrders(tableNumber);
+	}
+
+	/**
+	 * uses table order information to generate monetary check objects
+	 * @param tableNumber unique identifier for table to generate checks for
+	 * @param orders list strings listing orders on a per check basis
+	 * @return true if operation succeeds, false if operation fails
+	 */
+	@Override
+	public boolean generateChecks(int tableNumber, ArrayList<String> orders) {
+		return restaurant.generateChecks(tableNumber, orders);
+	}
+
+	/**
+	 * obtains the number of times a specific menu option has been ordered
+	 * @param type integer representing the menu subsection (i.e. 1 represents drinks)
+	 * @param itemIndex number correlating to menu option in specified subsection
+	 * @return number of times menu option has been ordered (-1 if operation fails)
+	 */
+	@Override
+	public int checkItemPopularity(int type, int itemIndex) {
+		return restaurant.checkItemPopularity(type, itemIndex);
+	}
+	
+	/**
 	 * logon authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails
@@ -148,56 +251,4 @@ public class RestaurantController implements RestaurantControllerInterface{
 	public void dumpToFile() {
 		restaurant.dumpToFile();
 	}
-
-	/**
-	 * creates order for a customer at a specified table
-	 * @param tableNumber unique identifier for 
-	 */
-	@Override
-	public boolean createOrder(int tableNumber, int drink,
-			int appetizer, int meal, int side, String special) {
-		return restaurant.createOrder(tableNumber, drink, appetizer, meal, side, special);
-	}
-
-	@Override
-	public boolean modifyOrder(int tableNumber, int orderID, String field, String newvalue) {
-		return restaurant.modifyOrder(tableNumber, orderID, field, newvalue);
-	}
-	
-	@Override
-	public boolean deleteOrder(int tableNumber, int orderID)
-	{
-		return restaurant.deleteOrder(tableNumber, orderID);
-	}
-
-	@Override
-	public ArrayList<Order> obtainOrderListByCreation() {
-		return restaurant.obtainOrderListByCreation();
-	}
-
-	@Override
-	public String getServersAndNumberOfTables() {
-		return restaurant.getServersAndNumberOfTables();
-	}
-
-	@Override
-	public String getTablesChecks(int tableNumber) {
-		return restaurant.getTablesChecks(tableNumber);
-	}
-
-	@Override
-	public String getTablesOrders(int tableNumber) {
-		return restaurant.getTablesOrders(tableNumber);
-	}
-
-	@Override
-	public boolean generateChecks(int tableNumber, ArrayList<String> orders) {
-		return restaurant.generateChecks(tableNumber, orders);
-	}
-
-	@Override
-	public int checkItemPopularity(int type, int itemIndex) {
-		return restaurant.checkItemPopularity(type, itemIndex);
-	}
-
 }
