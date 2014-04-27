@@ -187,7 +187,7 @@ public class Order implements OrderInterface {
 	 * @return void
 	 */
 	@Override
-	public void modifyTimeStamp() {
+	public void modifyTimeStamp(long timestamp) {
 		this.timestamp = System.currentTimeMillis();
 	}
 }
