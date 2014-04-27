@@ -8,11 +8,19 @@ meal: 1
 side: 1
 special: medium rare
 status: Ordered
-timestamp: 1398619788608
+timestamp: 1398626332514
 </ORDERS>
 Table 2 info: in use. assigned to Kyle.
 Kyle
 <ORDERS>
+2:
+drink: 3
+appetizer: 2
+meal: 1
+side: 2
+special: None
+status: Ordered
+timestamp: 1398626332515
 </ORDERS>
 Table 3 info: in use. assigned to Nels.
 Nels

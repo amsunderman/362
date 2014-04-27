@@ -1,7 +1,9 @@
 package interfaces;
 
 import java.util.ArrayList;
+
 import model.Order;
+import model.Server;
 
 public interface RestaurantControllerInterface {
 	boolean editTableCount(int newTableCount);
@@ -24,4 +26,6 @@ public interface RestaurantControllerInterface {
 	String getTablesOrders(int tableNumber);
 	int checkItemPopularity(int type, int itemIndex);
 	boolean authenticate(String passcode);
+	public ArrayList<Server> getServersPositive();
+	public ArrayList<Server> getServersNegative();
 }

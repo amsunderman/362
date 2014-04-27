@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import model.Order;
+import model.Server;
 import controller.RestaurantController;
 
 public class CommandLineInterface {
@@ -391,12 +392,24 @@ public class CommandLineInterface {
 					
 				//view a list of servers with positive feedback
 				case 27:
-					
+					ArrayList<Server> goodservers = controller.getServersPositive();
+					String goodList = "Servers with good feedback: \n";
+					for (Server s : goodservers)
+					{
+						goodList += s.getServerID() + "\n";
+					}
+					JOptionPane.showMessageDialog(null, goodList);
 					break;
 					
 				//view a list of servers with negative feedback
 				case 28:
-					
+					ArrayList<Server> badservers = controller.getServersNegative();
+					String badList = "Servers with bad feedback: \n";
+					for (Server s : badservers)
+					{
+						badList += s.getServerID() + "\n";
+					}
+					JOptionPane.showMessageDialog(null, badList);
 					break;
 					
 				//exit

@@ -659,4 +659,50 @@ public class Restaurant implements RestaurantInterface {
 		// utilize storage support to dump to file
 		storageSupport.dumpToFile(restaurantStatistics);
 	}
+
+	/**
+	 * gets a list of servers with feedback that is positive.
+	 * @param none
+	 * @return a list of servers with good feedback.
+	 */
+	public ArrayList<Server> getServersPositive() 
+	{
+		Collection<Server> servers = storageSupport.getServers();
+		ArrayList<Server> goodservers = new ArrayList<Server>();
+		// Goes through the list of all servers...
+		for (Server s : servers)
+		{
+			// And checks to see if the size of the goodFeedback list is greater than or equal to 1.
+			 if (s.goodFeedback.size() >= 1)
+			 {
+				 // Then adds the server to the list.
+				 goodservers.add(s);
+			 }
+		}
+		// Returns said list.
+		return goodservers;
+	}
+	
+	/**
+	 * gets a list of servers with feedback that is negative.
+	 * @param none
+	 * @return a list of servers with bad feedback.
+	 */
+	public ArrayList<Server> getServersNegative() 
+	{
+		Collection<Server> servers = storageSupport.getServers();
+		ArrayList<Server> badservers = new ArrayList<Server>();
+		// Goes through the list of all servers...
+		for (Server s : servers)
+		{
+			// And checks to see if the size of the badFeedback list is greater than or equal to 1.
+			 if (s.badFeedback.size() >= 1)
+			 {				
+				 // Then adds the server to the list.
+				 badservers.add(s);
+			 }
+		}
+		// Returns said list.
+		return badservers;
+	}
 }

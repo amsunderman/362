@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import interfaces.RestaurantControllerInterface;
 import model.Order;
 import model.Restaurant;
+import model.Server;
 
 /**
  * Controller class that mediates interactions between view and Restaurant Model. Handles an instance of Restaurant.
@@ -128,6 +129,28 @@ public class RestaurantController implements RestaurantControllerInterface{
 	@Override
 	public String getServerFeedback(String serverID) {
 		return restaurant.getServerFeedback(serverID);
+	}
+	
+	/**
+	 * gets a list of servers with feedback that is positive.
+	 * @param none
+	 * @return a list of servers with good feedback.
+	 */
+	@Override
+	public ArrayList<Server> getServersPositive()
+	{
+		return restaurant.getServersPositive();
+	}
+	
+	/**
+	 * gets a list of servers with feedback that is negative.
+	 * @param none
+	 * @return a list of servers with bad feedback.
+	 */
+	@Override
+	public ArrayList<Server> getServersNegative()
+	{
+		return restaurant.getServersNegative();
 	}
 	
 	/**
