@@ -334,6 +334,7 @@ public class CommandLineInterface {
 				//view popularity of menu items
 				case 26:
 					int type;
+					int count = -1;
 					String mealType=JOptionPane.showInputDialog(
 						    "Enter field number to modify \n"+
 						    " 1. Drink\n"+
@@ -349,7 +350,7 @@ public class CommandLineInterface {
 								" 2. Drink B\n"+
 								" 3. Drink C\n"
 								));
-						controller.checkItemPopularity(type, drink);
+						count = controller.checkItemPopularity(type, drink);
 					}
 					else if (type==2)
 					{
@@ -358,7 +359,7 @@ public class CommandLineInterface {
 								" 2. Appetizer B\n"+
 								" 3. Appetizer C\n"
 								));
-						controller.checkItemPopularity(type, appetizer);
+						count = controller.checkItemPopularity(type, appetizer);
 					}
 					else if (type==3)
 					{
@@ -367,7 +368,7 @@ public class CommandLineInterface {
 								" 2. Meal B\n"+
 								" 3. Meal C\n"							
 								));
-						controller.checkItemPopularity(type, meal);
+						count = controller.checkItemPopularity(type, meal);
 					}
 					else if (type==4)
 					{
@@ -376,7 +377,15 @@ public class CommandLineInterface {
 								" 2. Side B\n"+
 								" 3. Side C\n"
 								));
-						controller.checkItemPopularity(type, side);
+						count = controller.checkItemPopularity(type, side);
+					}
+					if(count == -1)
+					{
+						JOptionPane.showMessageDialog(null, "Operation failed");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "This item has been ordered " + count + " times");
 					}
 					break;
 					

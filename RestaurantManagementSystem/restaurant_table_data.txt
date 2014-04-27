@@ -3,22 +3,22 @@ Adam
 <ORDERS>
 1:
 drink: 1
-appetizer: 2
-meal: 3
-side: 1
-special: Extra BBQ Sauce
-status: Ordered
-timestamp: 1397226979673
-2:
-drink: 2
-appetizer: 3
+appetizer: 1
 meal: 1
-side: 2
-special: none
+side: 1
+special: medium rare
 status: Ordered
-timestamp: 1397227091368
+timestamp: 1398619788608
 </ORDERS>
 Table 2 info: in use. assigned to Kyle.
 Kyle
+<ORDERS>
+</ORDERS>
+Table 3 info: in use. assigned to Nels.
+Nels
+<ORDERS>
+</ORDERS>
+Table 4 info: not in use. no one assigned.
+_
 <ORDERS>
 </ORDERS>

@@ -124,7 +124,7 @@ public class Storage {
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in table data file read");
 			//uncomment if you want to see stack trace for file not existing
-//			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		//fills statistics
@@ -134,6 +134,65 @@ public class Storage {
 			while (scanner.hasNext()) {
 				restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
 				restaurantStatistics.updateOrderID(Integer.parseInt(scanner.next()));
+				scanner.nextLine();
+				//fill menu item counts in statistics
+				String line = scanner.nextLine();
+				int itemCounts[] = new int[3];
+				int i = 0;
+				while(!line.equals("</DRINKS>"))
+				{
+					if(line.equals("<DRINKS>"))
+					{
+						line = scanner.nextLine();
+						continue;
+					}
+					line = line.substring(2);
+					itemCounts[i++] = Integer.parseInt(line);
+					line = scanner.nextLine();
+				}
+				restaurantStatistics.setDrinks(itemCounts);
+				i = 0;
+				line = scanner.nextLine();
+				while(!line.equals("</APP>"))
+				{
+					if(line.equals("<APP>"))
+					{
+						line = scanner.nextLine();
+						continue;
+					}
+					line = line.substring(2);
+					itemCounts[i++] = Integer.parseInt(line);
+					line = scanner.nextLine();
+				}
+				restaurantStatistics.setApps(itemCounts);
+				i = 0;
+				line = scanner.nextLine();
+				while(!line.equals("</MEAL>"))
+				{
+					if(line.equals("<MEAL>"))
+					{
+						line = scanner.nextLine();
+						continue;
+					}
+					line = line.substring(2);
+					itemCounts[i++] = Integer.parseInt(line);
+					line = scanner.nextLine();
+				}
+				restaurantStatistics.setMeal(itemCounts);
+				i = 0;
+				line = scanner.nextLine();
+				while(!line.equals("</SIDE>"))
+				{
+					if(line.equals("<SIDE>"))
+					{
+						line = scanner.nextLine();
+						continue;
+					}
+					line = line.substring(2);
+					itemCounts[i++] = Integer.parseInt(line);
+					line = scanner.nextLine();
+				}
+				restaurantStatistics.setSides(itemCounts);
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in statistics data file read");
@@ -212,6 +271,31 @@ public class Storage {
 		}
 		writer.println(restaurantStatistics.getTableCount());
 		writer.println(restaurantStatistics.getOrderID());
+		writer.println("<DRINKS>");
+		for(int i = 1; i < 4; i++)
+		{
+			writer.println(i + " " + restaurantStatistics.getDrinkCount(i));
+		}
+		writer.println("</DRINKS>");
+		writer.println("<APP>");
+		for(int i = 1; i < 4; i++)
+		{
+			writer.println(i + " " + restaurantStatistics.getAppetizerCount(i));
+		}
+		writer.println("</APP>");
+		writer.println("<MEAL>");
+		for(int i = 1; i < 4; i++)
+		{
+			writer.println(i + " " + restaurantStatistics.getMealCount(i));
+		}
+		writer.println("</MEAL>");
+		writer.println("<SIDE>");
+		for(int i = 1; i < 4; i++)
+		{
+			writer.println(i + " " + restaurantStatistics.getSideCount(i));
+		}
+		writer.println("</SIDE>");
+		
 		writer.close();
 	}
 

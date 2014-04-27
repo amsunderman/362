@@ -15,6 +15,50 @@ public class RestaurantStatistics {
 	public int getOrderID() {
 		return orderID;
 	}
+	
+	public boolean setDrinks(int drinkCounts[])
+	{
+		if (drinkCounts.length != 3)
+			return false;
+		for(int i = 0; i < drink.length; i++)
+		{
+			drink[i] = drinkCounts[i];
+		}
+		return true;
+	}
+	
+	public boolean setApps(int appCounts[])
+	{
+		if (appCounts.length != 3)
+			return false;
+		for(int i = 0; i < appetizer.length; i++)
+		{
+			appetizer[i] = appCounts[i];
+		}
+		return true;
+	}
+	
+	public boolean setMeal(int mealCounts[])
+	{
+		if (mealCounts.length != 3)
+			return false;
+		for(int i = 0; i < meal.length; i++)
+		{
+			meal[i] = mealCounts[i];
+		}
+		return true;
+	}
+	
+	public boolean setSides(int sideCounts[])
+	{
+		if (sideCounts.length != 3)
+			return false;
+		for(int i = 0; i < side.length; i++)
+		{
+			side[i] = sideCounts[i];
+		}
+		return true;
+	}
 
 	public boolean updateDrinkCount(int drinkIndex, boolean up){
 		if (drinkIndex <= 3 && drinkIndex >= 1)
@@ -69,15 +113,15 @@ public class RestaurantStatistics {
 	}
 	
 	public int getMealCount(int itemIndex) {
-		return drink[itemIndex-1];
+		return meal[itemIndex-1];
 	}
 	
 	public int getAppetizerCount(int itemIndex) {
-		return drink[itemIndex-1];
+		return appetizer[itemIndex-1];
 	}
 	
 	public int getSideCount(int itemIndex) {
-		return drink[itemIndex-1];
+		return side[itemIndex-1];
 	}
 	
 	public boolean updateTableCount(int tableCount) {

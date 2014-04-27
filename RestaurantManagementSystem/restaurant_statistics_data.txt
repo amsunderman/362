@@ -1,26 +1,22 @@
-<TABLECOUNT>
-2
-</TABLECOUNT>
-<ORDERNUMBER>
 3
-</ORDERNUMBER>
+1
 <DRINKS>
-1 0
-2 0
-3 0
+1 2
+2 2
+3 3
 </DRINKS>
 <APP>
-1 0
-2 0
-3 0
+1 2
+2 3
+3 5
 </APP>
 <MEAL>
-1 0
-2 0
-3 0
+1 6
+2 3
+3 1
 </MEAL>
 <SIDE>
-1 0
-2 0
-3 0
+1 2
+2 3
+3 5
 </SIDE>
