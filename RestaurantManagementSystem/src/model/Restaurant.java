@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import model.Table;
+
 /**
  * Restaurant model that simulates a restaurant's interactions between servers, tables, orders, and checks
  * @author Team 3
@@ -632,6 +634,100 @@ public class Restaurant implements RestaurantInterface {
 		
 		// else return operation failure (-1)
 		return -1;
+	}
+	
+	/**
+	 * Gets a list of tables which require immediate server attention.
+	 * @param none
+	 * @return list of tables that require server action
+	 */
+	@Override
+	public ArrayList<Table> getTablesWithServerActionReqd()
+	{
+		// get all tables from storage
+		ArrayList<Table> allTables = storageSupport.getAllTables();
+		
+		// initialize return list of tables
+		ArrayList<Table> serverActionTables = new ArrayList<Table>();
+		
+		// loop through all tables to evaluate if server action is required
+		for(Table t : allTables)
+		{
+			// pull orders and checks from table to check for server action required status
+			HashMap<Integer, Order> orders = t.getAllOrders();
+			
+			// boolean flag to mark if table should be added to return list
+			boolean addTable = true;
+			
+			// boolean flags to mark if the first order has either apps ready or meal ready
+			boolean appsReady = false;
+			boolean mealReady = false;
+			
+			// if table doesn't contain any orders, don't add it
+			if(orders.isEmpty())
+			{
+				addTable = false;
+			}
+			
+			// check if all orders are either appetizer ready or meal ready
+			for (Entry<Integer, Order> entry : orders.entrySet())
+			{
+				// get order from hashtable entry
+				Order o = entry.getValue();
+				
+				// if this is the first order and appetizers are ready then mark appsReady flag
+				if(o.getStatus() == "Appetizers complete" && !appsReady && !mealReady)
+				{
+					appsReady = true;
+				}
+				
+				// if this is the first order and meal is ready then mark mealReady flag
+				else if(o.getStatus() == "Order complete" && !appsReady && !mealReady)
+				{
+					mealReady = true;
+				}
+				
+				// if apps are ready and current order doesn't have apps ready then this table doesn't require
+				// immediate action
+				else if(o.getStatus() != "Appetizers complete" && appsReady)
+				{
+					// server action not required. break loop
+					addTable = false;
+					break;
+				}
+				
+				// if meal is ready for some orders but current order doesn't have meal ready then this table doesn't
+				// requirer immediate action
+				else if(o.getStatus() == "Order complete" && mealReady)
+				{
+					// server action not required. break loop
+					addTable = false;
+					break;
+				}
+				
+				// if this order is the first order and isn't app or meal complete, this table doesn't need server
+				else if(o.getStatus() != "Appetizers Complete" && o.getStatus() != "Order complete" && !appsReady &&
+						!mealReady)
+				{
+					addTable = false;
+					break;
+				}
+				
+				else
+				{
+					// continue
+				}
+			}
+			
+			// if all orders are requiring server action then table requires server action
+			if(addTable)
+			{
+				serverActionTables.add(t);
+			}
+		}
+		
+		//return server action tables
+		return serverActionTables;
 	}
 	
 	/**

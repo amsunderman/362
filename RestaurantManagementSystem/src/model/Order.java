@@ -119,8 +119,12 @@ public class Order implements OrderInterface {
 		// if field equals status then update status
 		else if (field.equals("status"))
 		{
-			if(newvalue.equals("Ordered") || newvalue.equals("Appetizers Complete") || newvalue.equals("Order Complete"))
-				status = newvalue;
+			if(newvalue.equals("1"))
+				status = "Ordered";
+			else if(newvalue.equals("2"))
+				status = "Appetizers complete";
+			else if(newvalue.equals("3"))
+				status = "Order complete";
 			else
 				return false; // if status is invalid, return operation failure
 		}

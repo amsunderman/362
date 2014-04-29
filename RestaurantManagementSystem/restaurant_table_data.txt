@@ -7,8 +7,16 @@ appetizer: 1
 meal: 1
 side: 1
 special: medium rare
-status: Ordered
-timestamp: 1398626332514
+status: Appetizers complete
+timestamp: 1398804977590
+3:
+drink: 2
+appetizer: 3
+meal: 2
+side: 1
+special: more sauce
+status: Appetizers complete
+timestamp: 1398804977591
 </ORDERS>
 Table 2 info: in use. assigned to Kyle.
 Kyle
@@ -20,7 +28,7 @@ meal: 1
 side: 2
 special: None
 status: Ordered
-timestamp: 1398626332515
+timestamp: 1398804977591
 </ORDERS>
 Table 3 info: in use. assigned to Nels.
 Nels

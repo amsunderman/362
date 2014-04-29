@@ -6,6 +6,7 @@ import interfaces.RestaurantControllerInterface;
 import model.Order;
 import model.Restaurant;
 import model.Server;
+import model.Table;
 
 /**
  * Controller class that mediates interactions between view and Restaurant Model. Handles an instance of Restaurant.
@@ -257,7 +258,18 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 	
 	/**
-	 * logon authentication for Restaurant Manager
+	 * Gets a list of tables which require immediate server attention.
+	 * @param none
+	 * @return list of tables that require server action
+	 */
+	@Override
+	public ArrayList<Table> getTablesWithServerActionReqd()
+	{
+		return restaurant.getTablesWithServerActionReqd();
+	}
+	
+	/**
+	 * log on authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails
 	 */

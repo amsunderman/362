@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import model.Order;
 import model.Server;
+import model.Table;
 import controller.RestaurantController;
 
 public class CommandLineInterface {
@@ -304,7 +305,13 @@ public class CommandLineInterface {
 					
 				//view a list of tables with server action
 				case 20:
-					
+					ArrayList<Table> serverActionTables = controller.getTablesWithServerActionReqd();
+					String serverAction = "Tables that need server attention include:\n";
+					for(Table t : serverActionTables)
+					{
+						serverAction += "Table " + t.getTableNumber() + "\n";
+					}
+					JOptionPane.showMessageDialog(null, serverAction);
 					break;
 					
 				//get expected wait time for next table
