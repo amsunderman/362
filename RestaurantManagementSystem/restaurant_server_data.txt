@@ -1,5 +1,5 @@
 Nels
-0
+1
 <GOOD>
 Knows what he is doing.
 Talks Physics like a champ.
@@ -7,7 +7,7 @@ Talks Physics like a champ.
 <BAD>
 </BAD>
 Kyle
-0
+1
 <GOOD>
 Wonderful
 </GOOD>
@@ -15,7 +15,7 @@ Wonderful
 Forgot to thank me for dining.
 </BAD>
 Adam
-0
+2
 <GOOD>
 Great.
 </GOOD>
