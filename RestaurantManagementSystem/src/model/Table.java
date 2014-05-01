@@ -149,4 +149,10 @@ public class Table implements TableInterface {
 		return checks;
 	}
 	
+	@Override
+	public boolean isInUse()
+	{
+		return inUse;
+	}
+	
 }

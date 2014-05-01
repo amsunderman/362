@@ -20,4 +20,5 @@ public interface TableInterface {
 	boolean deleteOrder(int orderID);
 	ArrayList<Check> getAllChecks();
 	boolean addCheck(String orderString);
+	public boolean isInUse();
 }

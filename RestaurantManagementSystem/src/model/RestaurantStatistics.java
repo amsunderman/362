@@ -7,9 +7,9 @@ public class RestaurantStatistics {
 	private int side[] = new int[3];
 	private int tableCount = -1;
 	private int orderID = -1;
-	private int averageTimeInUse = -1;
-	private int averageTimeReadyForUse = -1;
-	private int avarageTimeWaitingToBeCleaned = -1;
+	private int averageTimeInUse = 20;
+	private int averageTimeReadyForUse = 10;
+	private int avarageTimeWaitingToBeCleaned = 5;
 
 	public int getTableCount() {
 		return tableCount;

@@ -731,6 +731,57 @@ public class Restaurant implements RestaurantInterface {
 	}
 	
 	/**
+	 * gets the estimated wait time for next table
+	 * @param none
+	 * @return number of minutes until table will be available
+	 */
+	@Override
+	public int getEstimatedWaitForNextTable()
+	{
+		// initialize return value
+		int minutesToWait = -1;
+		
+		// track which table has been in use the longest (likely first done)
+		long earliestTS = Long.MAX_VALUE;
+		
+		// get tables from storage
+		ArrayList<Table> tables = storageSupport.getAllTables();
+		
+		// loop through all tables and find table likely to finish first
+		for(Table t : tables)
+		{
+			if(!t.isInUse())
+			{
+				// if there is a table not in use then a table is already available so wait time is 0
+				return 0;
+			}
+			
+			// loop through orders keeping track of earliest time stamp and its table
+			for(Order o : t.getAllOrders().values())
+			{
+				if(o.getTimestamp() < earliestTS && !o.getStatus().equals("Order complete"))
+				{
+					earliestTS = o.getTimestamp();
+				}
+			}
+		}
+		
+		// calculate minutes to wait using average time tables are in use and waiting to be cleaned
+		minutesToWait = ((restaurantStatistics.getAverageTimeInUse() + 
+				restaurantStatistics.getAvarageTimeWaitingToBeCleaned()) - (int) ((System.currentTimeMillis() - 
+				earliestTS) / 60000));
+		
+		// if minutes to wait is below 5 or negative, inform user it will be about 5 minutes
+		if(minutesToWait < 5)
+		{
+			return 5;
+		}
+		
+		// return successfully
+		return minutesToWait;
+	}
+	
+	/**
 	 * logon authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails

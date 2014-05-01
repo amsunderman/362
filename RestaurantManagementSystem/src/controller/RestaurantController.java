@@ -269,6 +269,17 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 	
 	/**
+	 * gets the estimated wait time for next table
+	 * @param none
+	 * @return number of minutes until table will be available
+	 */
+	@Override
+	public int getEstimatedWaitForNextTable()
+	{
+		return restaurant.getEstimatedWaitForNextTable();
+	}
+	
+	/**
 	 * log on authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails

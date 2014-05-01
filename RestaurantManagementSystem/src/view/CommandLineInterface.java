@@ -316,7 +316,8 @@ public class CommandLineInterface {
 					
 				//get expected wait time for next table
 				case 21:
-					
+					int expectedWait = controller.getEstimatedWaitForNextTable();
+					JOptionPane.showMessageDialog(null, "The expected wait is " + expectedWait + " minutes.");
 					break;
 					
 				//obtain average time a table is waiting to be cleaned
