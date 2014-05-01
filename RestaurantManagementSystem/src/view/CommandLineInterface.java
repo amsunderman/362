@@ -335,9 +335,10 @@ public class CommandLineInterface {
 					
 					break;
 					
-				//obtain a revenue report for a specific date
+				//obtain a revenue report
 				case 25:
-					
+					int revenueToDate = controller.getRevenue();
+					JOptionPane.showMessageDialog(null, "The revenue to date is $" + revenueToDate);
 					break;
 					
 				//view popularity of menu items

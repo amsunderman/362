@@ -376,16 +376,22 @@ public class Restaurant implements RestaurantInterface {
 		// get table from storage
 		Table t = storageSupport.getTable(tableNumber);
 		
+		// order's generated revenue
+		int orderRevenue = 0;
+		
 		// if table doesn't exist, return operation failure
 		if (t == null)
 			return false;
 		
 		// update restaurant statistics for all ordered items
 		restaurantStatistics.updateOrderID(++orderID);
-		restaurantStatistics.updateDrinkCount(drink, true);
-		restaurantStatistics.updateMealCount(meal, true);
-		restaurantStatistics.updateAppetizerCount(appetizer, true);
-		restaurantStatistics.updateSideCount(side, true);
+		orderRevenue += restaurantStatistics.updateDrinkCount(drink, true);
+		orderRevenue += restaurantStatistics.updateMealCount(meal, true);
+		orderRevenue += restaurantStatistics.updateAppetizerCount(appetizer, true);
+		orderRevenue += restaurantStatistics.updateSideCount(side, true);
+		
+		// update revenue in statistics
+		restaurantStatistics.setRevenue(restaurantStatistics.getRevenue() + orderRevenue);
 		
 		// create new order
 		Order o = new Order(orderID, drink, appetizer, meal, side, special);
@@ -779,6 +785,17 @@ public class Restaurant implements RestaurantInterface {
 		
 		// return successfully
 		return minutesToWait;
+	}
+
+	/**
+	 * get revenue earned to date
+	 * @param none
+	 * @return revenue to date in dollars
+	 */
+	@Override
+	public int getRevenue()
+	{
+		return restaurantStatistics.getRevenue();
 	}
 	
 	/**

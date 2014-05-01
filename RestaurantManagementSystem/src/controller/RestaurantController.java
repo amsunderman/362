@@ -280,6 +280,17 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 	
 	/**
+	 * get revenue earned to date
+	 * @param none
+	 * @return revenue to date in dollars
+	 */
+	@Override
+	public int getRevenue()
+	{
+		return restaurant.getRevenue();
+	}
+	
+	/**
 	 * log on authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails

@@ -134,6 +134,7 @@ public class Storage {
 			while (scanner.hasNext()) {
 				restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
 				restaurantStatistics.updateOrderID(Integer.parseInt(scanner.next()));
+				restaurantStatistics.setRevenue(Integer.parseInt(scanner.next()));
 				scanner.nextLine();
 				//fill menu item counts in statistics
 				String line = scanner.nextLine();
@@ -271,6 +272,7 @@ public class Storage {
 		}
 		writer.println(restaurantStatistics.getTableCount());
 		writer.println(restaurantStatistics.getOrderID());
+		writer.println(restaurantStatistics.getRevenue());
 		writer.println("<DRINKS>");
 		for(int i = 1; i < 4; i++)
 		{

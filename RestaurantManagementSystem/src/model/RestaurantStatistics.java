@@ -5,11 +5,16 @@ public class RestaurantStatistics {
 	private int meal[] = new int[3];
 	private int appetizer[] = new int[3];
 	private int side[] = new int[3];
+	private int drinkPrices[] = {1, 2, 3};
+	private int mealPrices[] = {10, 20, 30};
+	private int appetizerPrices[] = {3, 6, 9};
+	private int sidePrices[] = {2, 4, 6};
 	private int tableCount = -1;
 	private int orderID = -1;
 	private int averageTimeInUse = 20;
 	private int averageTimeReadyForUse = 10;
 	private int avarageTimeWaitingToBeCleaned = 5;
+	private int revenue = 0;
 
 	public int getTableCount() {
 		return tableCount;
@@ -63,52 +68,52 @@ public class RestaurantStatistics {
 		return true;
 	}
 
-	public boolean updateDrinkCount(int drinkIndex, boolean up){
+	public int updateDrinkCount(int drinkIndex, boolean up){
 		if (drinkIndex <= 3 && drinkIndex >= 1)
 		{
 			if(up)
 				drink[drinkIndex-1]++;
 			else
 				drink[drinkIndex-1]--;
-			return true;
+			return drinkPrices[drinkIndex-1];
 		}
-		return false;
+		return -1;
 	}
 	
-	public boolean updateMealCount(int mealIndex, boolean up){
+	public int updateMealCount(int mealIndex, boolean up){
 		if (mealIndex <= 3 && mealIndex >= 1)
 		{
 			if(up)
 				meal[mealIndex-1]++;
 			else
 				meal[mealIndex-1]--;
-			return true;
+			return mealPrices[mealIndex-1];
 		}
-		return false;
+		return -1;
 	}
 	
-	public boolean updateAppetizerCount(int appetizerIndex, boolean up){
+	public int updateAppetizerCount(int appetizerIndex, boolean up){
 		if (appetizerIndex <= 3 && appetizerIndex >= 1)
 		{
 			if(up)
 				appetizer[appetizerIndex-1]++;
 			else
 				appetizer[appetizerIndex-1]--;
-			return true;
+			return appetizerPrices[appetizerIndex-1];
 		}
-		return false;
+		return -1;
 	}
 	
-	public boolean updateSideCount(int sideIndex, boolean up){
+	public int updateSideCount(int sideIndex, boolean up){
 		if (sideIndex <= 3 && sideIndex >= 1)
 		{
 			if(up)
 				side[sideIndex-1]++;
 			else
 				side[sideIndex-1]--;
-			return true;
+			return sidePrices[sideIndex-1];
 		}
-		return false;
+		return -1;
 	}
 	
 	public int getDrinkCount(int itemIndex) {
@@ -163,6 +168,16 @@ public class RestaurantStatistics {
 	public void setAvarageTimeWaitingToBeCleaned(
 			int avarageTimeWaitingToBeCleaned) {
 		this.avarageTimeWaitingToBeCleaned = avarageTimeWaitingToBeCleaned;
+	}
+	
+	public int getRevenue()
+	{
+		return revenue;
+	}
+	
+	public void setRevenue(int newRevenue)
+	{
+		revenue = newRevenue;
 	}
 	
 }

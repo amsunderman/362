@@ -28,6 +28,7 @@ public interface RestaurantControllerInterface {
 	int checkItemPopularity(int type, int itemIndex);
 	public ArrayList<Table> getTablesWithServerActionReqd();
 	public int getEstimatedWaitForNextTable();
+	public int getRevenue();
 	boolean authenticate(String passcode);
 	public ArrayList<Server> getServersPositive();
 	public ArrayList<Server> getServersNegative();

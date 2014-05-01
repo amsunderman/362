@@ -85,32 +85,32 @@ public class Order implements OrderInterface {
 		if (field.equals("drink"))
 		{
 			int drinkIndex = Integer.parseInt(newvalue);
-			stats.updateDrinkCount(drinkIndex, true);
-			stats.updateDrinkCount(drink, false);
+			stats.setRevenue(stats.getRevenue() + stats.updateDrinkCount(drinkIndex, true));
+			stats.setRevenue(stats.getRevenue() - stats.updateDrinkCount(drinkIndex, false));
 			drink = drinkIndex;
 		}
 		// if field equals appetizer update appetizer and correlating stats
 		else if (field.equals("appetizer"))
 		{
 			int appetizerIndex = Integer.parseInt(newvalue);
-			stats.updateAppetizerCount(appetizerIndex, true);
-			stats.updateAppetizerCount(appetizer, false);
+			stats.setRevenue(stats.getRevenue() + stats.updateDrinkCount(appetizerIndex, true));
+			stats.setRevenue(stats.getRevenue() - stats.updateDrinkCount(appetizerIndex, false));
 			appetizer = appetizerIndex;
 		}
 		// if field equals meal then update meal and correlating stats
 		else if (field.equals("meal"))
 		{
 			int mealIndex = Integer.parseInt(newvalue);
-			stats.updateMealCount(mealIndex, true);
-			stats.updateMealCount(meal, false);
+			stats.setRevenue(stats.getRevenue() + stats.updateDrinkCount(mealIndex, true));
+			stats.setRevenue(stats.getRevenue() - stats.updateDrinkCount(mealIndex, false));
 			meal = mealIndex;
 		}
 		// if field equals side then update side and correlating stats
 		else if (field.equals("side"))
 		{
 			int sideIndex = Integer.parseInt(newvalue);
-			stats.updateSideCount(sideIndex, true);
-			stats.updateSideCount(side, false);
+			stats.setRevenue(stats.getRevenue() + stats.updateDrinkCount(sideIndex, true));
+			stats.setRevenue(stats.getRevenue() - stats.updateDrinkCount(sideIndex, false));
 			side = sideIndex;
 		}
 		// if field equals special then update special requests
