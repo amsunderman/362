@@ -7,6 +7,9 @@ public class RestaurantStatistics {
 	private int side[] = new int[3];
 	private int tableCount = -1;
 	private int orderID = -1;
+	private int averageTimeInUse = -1;
+	private int averageTimeReadyForUse = -1;
+	private int avarageTimeWaitingToBeCleaned = -1;
 
 	public int getTableCount() {
 		return tableCount;
@@ -135,6 +138,31 @@ public class RestaurantStatistics {
 	public boolean updateOrderID(int orderID) {
 		this.orderID = orderID;
 		return true;
+	}
+
+	public int getAverageTimeInUse() {
+		return averageTimeInUse;
+	}
+
+	public void setAverageTimeInUse(int averageTimeInUse) {
+		this.averageTimeInUse = averageTimeInUse;
+	}
+
+	public int getAverageTimeReadyForUse() {
+		return averageTimeReadyForUse;
+	}
+
+	public void setAverageTimeReadyForUse(int averageTimeReadyForUse) {
+		this.averageTimeReadyForUse = averageTimeReadyForUse;
+	}
+
+	public int getAvarageTimeWaitingToBeCleaned() {
+		return avarageTimeWaitingToBeCleaned;
+	}
+
+	public void setAvarageTimeWaitingToBeCleaned(
+			int avarageTimeWaitingToBeCleaned) {
+		this.avarageTimeWaitingToBeCleaned = avarageTimeWaitingToBeCleaned;
 	}
 	
 }
