@@ -274,7 +274,11 @@ public class RestaurantController implements RestaurantControllerInterface{
 	 * @return number of minutes until table will be available
 	 */
 	@Override
+<<<<<<< HEAD
 	public long getEstimatedWaitForNextTable()
+=======
+	public int getEstimatedWaitForNextTable()
+>>>>>>> c63277de16cd3734bc7a447b292039999fe1353e
 	{
 		return restaurant.getEstimatedWaitForNextTable();
 	}

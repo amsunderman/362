@@ -227,7 +227,6 @@ public class RestaurantStatistics implements RestaurantStatisticsInterface{
 		return revenue;
 	}
 	
-	@Override
 	public void setRevenue(int newRevenue)
 	{
 		revenue = newRevenue;

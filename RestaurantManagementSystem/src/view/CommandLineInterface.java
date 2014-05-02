@@ -316,7 +316,11 @@ public class CommandLineInterface {
 					
 				//get expected wait time for next table
 				case 21:
+<<<<<<< HEAD
 					long expectedWait = controller.getEstimatedWaitForNextTable();
+=======
+					int expectedWait = controller.getEstimatedWaitForNextTable();
+>>>>>>> c63277de16cd3734bc7a447b292039999fe1353e
 					JOptionPane.showMessageDialog(null, "The expected wait is " + expectedWait + " minutes.");
 					break;
 					
