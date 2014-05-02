@@ -7,4 +7,5 @@ public interface ServerInterface {
 	String getServerID();
 	int getTableCount();
 	void incrementTableCount();
+	void setTableCount(int tableCount);
 }

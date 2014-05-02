@@ -43,14 +43,17 @@ public class StorageSupport implements StorageSupportInterface{
 		return storage.getServer(serverID);
 	}
 
+	@Override
 	public void dumpToFile(RestaurantStatistics restaurantStatistics) {
 		storage.dumpToFile(restaurantStatistics);
 	}
 	
+	@Override
 	public boolean putTable(Table table) {
 		return storage.putTable(table);
 	}
 	
+	@Override
 	public boolean deleteTable(int tableNumber) {
 		return storage.deleteTable(tableNumber);
 	}

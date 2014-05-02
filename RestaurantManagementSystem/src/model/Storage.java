@@ -132,8 +132,9 @@ public class Storage {
 		try {
 			scanner = new Scanner(file);
 			while (scanner.hasNext()) {
-				restaurantStatistics.updateTableCount(Integer.parseInt(scanner.next()));
+				restaurantStatistics.updateTableCount(scanner.nextInt());
 				restaurantStatistics.updateOrderID(Integer.parseInt(scanner.next()));
+				restaurantStatistics.setRevenue(Integer.parseInt(scanner.next()));
 				scanner.nextLine();
 				//fill menu item counts in statistics
 				String line = scanner.nextLine();
@@ -193,6 +194,17 @@ public class Storage {
 					line = scanner.nextLine();
 				}
 				restaurantStatistics.setSides(itemCounts);
+				
+				i = 0;
+				line = scanner.nextLine();
+				if(line.equals("<AVERAGES>"))
+				{
+					restaurantStatistics.setAverageTimeInUse(scanner.nextLong());
+					restaurantStatistics.setAverageTimeInUseOccurrences(scanner.nextLong());
+					restaurantStatistics.setAverageTimeReadyForUse(scanner.nextLong());
+					restaurantStatistics.setAverageTimeReadyForUseOccurrences(scanner.nextLong());
+					scanner.next();
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in statistics data file read");
@@ -271,6 +283,7 @@ public class Storage {
 		}
 		writer.println(restaurantStatistics.getTableCount());
 		writer.println(restaurantStatistics.getOrderID());
+		writer.println(restaurantStatistics.getRevenue());
 		writer.println("<DRINKS>");
 		for(int i = 1; i < 4; i++)
 		{
@@ -296,6 +309,12 @@ public class Storage {
 		}
 		writer.println("</SIDE>");
 		
+		writer.println("<AVERAGES>");
+		writer.println(restaurantStatistics.getAverageTimeInUse());
+		writer.println(restaurantStatistics.getAverageTimeInUseOccurrences());
+		writer.println(restaurantStatistics.getAverageTimeReadyForUse());
+		writer.println(restaurantStatistics.getAverageTimeReadyForUseOccurrences());
+		writer.println("</AVERAGES>");
 		writer.close();
 	}
 

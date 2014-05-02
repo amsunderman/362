@@ -232,7 +232,13 @@ public class Restaurant implements RestaurantInterface {
 		}
 		
 		// set table to "in use" and return operation status
-		return table.setToInUse(server);
+		long averageTimeReadyForUse = table.setToInUse(server);
+		if (averageTimeReadyForUse == -1) {
+			return false;
+		} else {
+			restaurantStatistics.updateAverageTimeReadyForUse(averageTimeReadyForUse);
+			return true;
+		}
 	}
 
 	/**
@@ -376,16 +382,22 @@ public class Restaurant implements RestaurantInterface {
 		// get table from storage
 		Table t = storageSupport.getTable(tableNumber);
 		
+		// order's generated revenue
+		int orderRevenue = 0;
+		
 		// if table doesn't exist, return operation failure
 		if (t == null)
 			return false;
 		
 		// update restaurant statistics for all ordered items
 		restaurantStatistics.updateOrderID(++orderID);
-		restaurantStatistics.updateDrinkCount(drink, true);
-		restaurantStatistics.updateMealCount(meal, true);
-		restaurantStatistics.updateAppetizerCount(appetizer, true);
-		restaurantStatistics.updateSideCount(side, true);
+		orderRevenue += restaurantStatistics.updateDrinkCount(drink, true);
+		orderRevenue += restaurantStatistics.updateMealCount(meal, true);
+		orderRevenue += restaurantStatistics.updateAppetizerCount(appetizer, true);
+		orderRevenue += restaurantStatistics.updateSideCount(side, true);
+		
+		// update revenue in statistics
+		restaurantStatistics.setRevenue(restaurantStatistics.getRevenue() + orderRevenue);
 		
 		// create new order
 		Order o = new Order(orderID, drink, appetizer, meal, side, special);
@@ -731,6 +743,67 @@ public class Restaurant implements RestaurantInterface {
 	}
 	
 	/**
+	 * gets the estimated wait time for next table
+	 * @param none
+	 * @return number of minutes until table will be available
+	 */
+	@Override
+	public long getEstimatedWaitForNextTable()
+	{
+		// initialize return value
+		long minutesToWait = -1;
+		
+		// track which table has been in use the longest (likely first done)
+		long earliestTS = Long.MAX_VALUE;
+		
+		// get tables from storage
+		ArrayList<Table> tables = storageSupport.getAllTables();
+		
+		// loop through all tables and find table likely to finish first
+		for(Table t : tables)
+		{
+			if(!t.isInUse())
+			{
+				// if there is a table not in use then a table is already available so wait time is 0
+				return 0;
+			}
+			
+			// loop through orders keeping track of earliest time stamp and its table
+			for(Order o : t.getAllOrders().values())
+			{
+				if(o.getTimestamp() < earliestTS && !o.getStatus().equals("Order complete"))
+				{
+					earliestTS = o.getTimestamp();
+				}
+			}
+		}
+		
+		// calculate minutes to wait using average time tables are in use and waiting to be cleaned
+		minutesToWait = (restaurantStatistics.getAverageTimeInUse() - (int) ((System.currentTimeMillis() - 
+				earliestTS) / 60000));
+		
+		// if minutes to wait is below 5 or negative, inform user it will be about 5 minutes
+		if(minutesToWait < 5)
+		{
+			return 5;
+		}
+		
+		// return successfully
+		return minutesToWait;
+	}
+
+	/**
+	 * get revenue earned to date
+	 * @param none
+	 * @return revenue to date in dollars
+	 */
+	@Override
+	public int getRevenue()
+	{
+		return restaurantStatistics.getRevenue();
+	}
+	
+	/**
 	 * logon authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails
@@ -750,6 +823,7 @@ public class Restaurant implements RestaurantInterface {
 	 * @param none
 	 * @return void
 	 */
+	@Override
 	public void dumpToFile() {
 		
 		// utilize storage support to dump to file
@@ -761,6 +835,7 @@ public class Restaurant implements RestaurantInterface {
 	 * @param none
 	 * @return a list of servers with good feedback.
 	 */
+	@Override
 	public ArrayList<Server> getServersPositive() 
 	{
 		Collection<Server> servers = storageSupport.getServers();
@@ -784,6 +859,7 @@ public class Restaurant implements RestaurantInterface {
 	 * @param none
 	 * @return a list of servers with bad feedback.
 	 */
+	@Override
 	public ArrayList<Server> getServersNegative() 
 	{
 		Collection<Server> servers = storageSupport.getServers();
@@ -800,5 +876,15 @@ public class Restaurant implements RestaurantInterface {
 		}
 		// Returns said list.
 		return badservers;
+	}
+
+	@Override
+	public long getAverageTimeInUse() {
+		return restaurantStatistics.getAverageTimeInUse();
+	}
+
+	@Override
+	public long getAverageTimeReadyForUse() {
+		return restaurantStatistics.getAverageTimeReadyForUse();
 	}
 }

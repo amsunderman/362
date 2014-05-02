@@ -11,8 +11,8 @@ public interface TableInterface {
 	String getTableInfo();
 	Server getServer();
 	boolean setServer(Server newServer);
-	boolean setToInUse(Server server);
-	void setToReady();
+	long setToInUse(Server server);
+	long setToReady();
 	int getTableNumber();
 	boolean putOrder(Order o);
 	Order getOrder(int orderID);
@@ -20,4 +20,5 @@ public interface TableInterface {
 	boolean deleteOrder(int orderID);
 	ArrayList<Check> getAllChecks();
 	boolean addCheck(String orderString);
+	public boolean isInUse();
 }

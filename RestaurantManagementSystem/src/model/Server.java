@@ -71,6 +71,7 @@ public class Server implements ServerInterface {
 		return tableCount;
 	}
 
+	@Override
 	public void setTableCount(int tableCount) {
 		this.tableCount = tableCount;		
 	}

@@ -269,6 +269,28 @@ public class RestaurantController implements RestaurantControllerInterface{
 	}
 	
 	/**
+	 * gets the estimated wait time for next table
+	 * @param none
+	 * @return number of minutes until table will be available
+	 */
+	@Override
+	public long getEstimatedWaitForNextTable()
+	{
+		return restaurant.getEstimatedWaitForNextTable();
+	}
+	
+	/**
+	 * get revenue earned to date
+	 * @param none
+	 * @return revenue to date in dollars
+	 */
+	@Override
+	public int getRevenue()
+	{
+		return restaurant.getRevenue();
+	}
+	
+	/**
 	 * log on authentication for Restaurant Manager
 	 * @param passcode password for manager account
 	 * @return true if manager successfully logs in, false if operation fails
@@ -283,7 +305,18 @@ public class RestaurantController implements RestaurantControllerInterface{
 	 * @param none
 	 * @return void
 	 */
+	@Override
 	public void dumpToFile() {
 		restaurant.dumpToFile();
+	}
+	
+	@Override
+	public long getAverageTimeInUse() {
+		return restaurant.getAverageTimeInUse();
+	}
+
+	@Override
+	public long getAverageTimeReadyForUse() {
+		return restaurant.getAverageTimeReadyForUse();
 	}
 }

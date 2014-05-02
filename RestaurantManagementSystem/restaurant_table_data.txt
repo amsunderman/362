@@ -1,40 +1,56 @@
-Table 1 info: in use. assigned to Adam.
-Adam
+Table 1 info: not in use. no one assigned.
+_
 <ORDERS>
-1:
+8:
 drink: 1
 appetizer: 1
 meal: 1
 side: 1
-special: medium rare
-status: Appetizers complete
-timestamp: 1398804977590
-3:
-drink: 2
-appetizer: 3
-meal: 2
-side: 1
-special: more sauce
-status: Appetizers complete
-timestamp: 1398804977591
+special: bbq
+status: Ordered
+timestamp: 1398953932717
 </ORDERS>
 Table 2 info: in use. assigned to Kyle.
 Kyle
 <ORDERS>
-2:
-drink: 3
+9:
+drink: 2
 appetizer: 2
-meal: 1
+meal: 2
 side: 2
-special: None
+special: nels please
 status: Ordered
-timestamp: 1398804977591
+timestamp: 1398953932717
+13:
+drink: 2
+appetizer: 3
+meal: 1
+side: 3
+special: medium rare
+status: Ordered
+timestamp: 1398953932718
 </ORDERS>
 Table 3 info: in use. assigned to Nels.
 Nels
 <ORDERS>
+10:
+drink: 3
+appetizer: 3
+meal: 3
+side: 3
+special: kyle please
+status: Ordered
+timestamp: 1398953932718
 </ORDERS>
-Table 4 info: not in use. no one assigned.
-_
+Table 4 info: in use. assigned to Adam.
+Adam
 <ORDERS>
+11:
+drink: 1
+appetizer: 2
+meal: 3
+side: 1
+special: medium rare
+status: Ordered
+timestamp: 1398953932719
 </ORDERS>

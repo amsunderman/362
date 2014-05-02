@@ -3,6 +3,7 @@ package interfaces;
 import java.util.ArrayList;
 
 import model.Order;
+import model.Server;
 import model.Table;
 
 public interface RestaurantInterface {
@@ -25,6 +26,13 @@ public interface RestaurantInterface {
 	String getTablesOrders(int tableNumber);
 	int checkItemPopularity(int type, int itemIndex);
 	public ArrayList<Table> getTablesWithServerActionReqd();
+	public long getEstimatedWaitForNextTable();
+	public int getRevenue();
 	boolean generateChecks(int tableNumber, ArrayList<String> orders);
 	boolean authenticate(String passcode);
+	void dumpToFile();
+	ArrayList<Server> getServersPositive();
+	ArrayList<Server> getServersNegative();
+	long getAverageTimeInUse();
+	long getAverageTimeReadyForUse();
 }

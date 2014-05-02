@@ -316,7 +316,8 @@ public class CommandLineInterface {
 					
 				//get expected wait time for next table
 				case 21:
-					
+					long expectedWait = controller.getEstimatedWaitForNextTable();
+					JOptionPane.showMessageDialog(null, "The expected wait is " + expectedWait + " minutes.");
 					break;
 					
 				//obtain average time a table is waiting to be cleaned
@@ -326,17 +327,20 @@ public class CommandLineInterface {
 					
 				//obtain average time a table is in use
 				case 23:
-					
+					long avgTime = controller.getAverageTimeInUse();
+					JOptionPane.showMessageDialog(null, "The average time a table is in use is " + avgTime);
 					break;
 					
 				//obtain average time a table is ready for use
 				case 24:
-					
+					long avgTimeReady = controller.getAverageTimeReadyForUse();
+					JOptionPane.showMessageDialog(null, "The average time a table is ready for use is " + avgTimeReady);
 					break;
 					
-				//obtain a revenue report for a specific date
+				//obtain a revenue report
 				case 25:
-					
+					int revenueToDate = controller.getRevenue();
+					JOptionPane.showMessageDialog(null, "The revenue to date is $" + revenueToDate);
 					break;
 					
 				//view popularity of menu items

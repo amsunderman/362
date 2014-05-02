@@ -12,6 +12,7 @@ public class Table implements TableInterface {
 	private Server server = null;
 	//true if in use, false if ready for use
 	private boolean inUse = false;
+	private long timestamp = -1;
 	private HashMap<Integer, Order> orders = new HashMap<Integer, Order>();
 	private ArrayList<Check> checks = new ArrayList<Check>();
 	
@@ -61,18 +62,30 @@ public class Table implements TableInterface {
 	}
 
 	@Override
-	public boolean setToInUse(Server server) {
+	public long setToInUse(Server server) {
 		if (server == null) {
-			return false;
+			return -1;
 		}
 		inUse = true;
-		return setServer(server);
+		setServer(server);
+		if (timestamp == -1) {
+			return 0;
+		}
+		long ret = System.currentTimeMillis() - timestamp;
+		timestamp = System.currentTimeMillis();
+		return ret;
 	}
 
 	@Override
-	public void setToReady() {
+	public long setToReady() {
 		server = null;
 		inUse = false;
+		if (timestamp == -1) {
+			return 0;
+		}
+		long ret = System.currentTimeMillis() - timestamp;
+		timestamp = System.currentTimeMillis();
+		return ret;
 	}
 	
 	@Override
@@ -147,6 +160,12 @@ public class Table implements TableInterface {
 	@Override
 	public ArrayList<Check> getAllChecks() {
 		return checks;
+	}
+	
+	@Override
+	public boolean isInUse()
+	{
+		return inUse;
 	}
 	
 }
